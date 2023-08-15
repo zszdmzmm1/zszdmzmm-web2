@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("/hello")
 public class HelloServlet implements Servlet {
 
     public void init(ServletConfig servletConfig) throws ServletException {
