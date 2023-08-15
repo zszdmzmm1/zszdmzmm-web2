@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="../build/assets/app.css">
+</head>
+<body>
+    <div class="vh-100 px-2 mb-5">
+        <header class="d-flex flex-column justify-content-between">
+            <!--            导航栏-->
+            <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5 shadow">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <img src="../image/QQ图片20230720103937.jpg" alt="头像" height="40" >
+                        <a href="../index.html" class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <i class="bi bi-box py-2 nav-item"></i>
+                            <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
+                               href="../resume/resume2.html">简历</a>
+                            <i class="bi bi-journal-text py-2 nav-item"></i>
+                            <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="#">博客</a>
+                            <i class="bi bi-github py-2 nav-item"></i>
+                            <div class="nav-item dropdown" onmouseleave="dropDownMenuHidden()"
+                                 onmouseenter="dropDownMenuShow()">
+                                <a class="nav-link dropdown-toggle me-3 py-2 text-decoration-none link-body-emphasis"
+                                   href="https://github.com/zszdmzmm1" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    GitHub
+                                </a>
+                                <ul id="dropdown" class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="https://github.com/zszdmzmm1">个人主页</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                           href="https://github.com/zszdmzmm1/learnning">Java仓库</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                           href="https://github.com/zszdmzmm1/zszdmzmm-web">Web仓库</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                           href="https://zszdmzmm1.github.io/bilibili-plugin/">bilibili插件介绍页</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12">
+                    <h1 class="display-3 text-center">国内执行npm指令</h1>
+                    <div class="mb-5 text-center">作者：</div>
+                    <nav data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" tabindex="0">
+                        <div id="item-1">
+                            <h3>为什么慢</h3>
+                            <p>执行 npm 各种命令的时候，默认是去 npm 官方镜像源获取需要安装的具体软件信息
+                                以下命令查看当前使用的镜像源
+                                npm config get registry
+                                默认源地址在国外，从国内访问的速度肯定比较慢</p>
+                        </div>
+                        <div id="item-2">
+                            <h3>如何修改镜像源</h3>
+                            <p>淘宝维护着一个完整的 npm 镜像源 https://registry.npm.taobao.org/</p>
+                        </div>
+                        <div id="item-2-1">
+                            <h4>a). 临时修改</h4>
+                            <p>npm install 软件名 --registry https://registry.npm.taobao.org/</p>
+                        </div>
+                        <div id="item-2-2">
+                            <h4>b). 全局修改</h4>
+                            <p>npm config set registry https://registry.npm.taobao.org/</p>
+                        </div>
+                        <div id="item-2-3">
+                            <h4>c). 使用第三方软件快速修改、切换 npm 镜像源</h4>
+                            <p>nrm NPM registry manager
+                                nrm 不仅可以快速切换镜像源，还可以测试自己网络访问不同源的速度
+                            </p>
+                        </div>
+                        <div id="item-2-3-1">
+                            <h5>安装 nrm</h5>
+                            <p>npm install -g npm</p>
+                        </div>
+                        <div id="item-2-3-2">
+                            <h5>列出当前可用的所有镜像源</h5>
+                            <p>
+                                <code>
+                                    <pre>nrm ls
+    npm -----  https://registry.npmjs.org/
+    cnpm ----  http://r.cnpmjs.org/
+    taobao --  https://registry.npm.taobao.org/
+    nj ------  https://registry.nodejitsu.com/
+    rednpm -- http://registry.mirror.cqupt.edu.cn
+    skimdb -- https://skimdb.npmjs.com/registr</pre>
+                                </code>
+                            </p>
+                        </div>
+                        <div id="item-2-3-3">
+                            <h5>使用淘宝镜像源</h5>
+                            <pre>nrm use taobao</pre>
+                            <p>更多用法查看 nrm GitHub</p>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <nav id="navbar-example3" class="flex-column align-items-stretch ps-4 border-start position-sticky top-0">
+                        <nav id="toc" class="nav nav-pills flex-column"></nav>
+                    </nav>
+                </div>
+            </div>
+        </main>
+        <footer class="mt-5 border-top text-center p-3">
+            <p class="d-inline text-body-secondary">Designed by</p>
+            <p class="d-inline fw-bold">@zszdmzmm</p>
+            <p class="d-inline text-body-secondary">-From X to Z</p>
+        </footer>
+        <script src="../build/assets/app.js"></script>
+        <script>
+            const titleElement = $("H3, H4, H5");
+            let HTML = ""
+            titleElement.each(function (){
+                if($(this).prop("tagName") === "H3"){
+                    HTML += `<a class="nav-link ps-1" href=#${$(this).parent().attr("id")}>${$(this).text()}</a>`
+                }else if($(this).prop("tagName") === "H4"){
+                    HTML += `<a class="nav-link ps-3" href=#${$(this).parent().attr("id")}>${$(this).text()}</a>`
+                }else{
+                    HTML += `<a class="nav-link ps-5" href=#${$(this).parent().attr("id")}>${$(this).text()}</a>`
+                }
+            })
+            $("#toc").append(HTML);
+        </script>
+    </div>
+</body>
+</html>
