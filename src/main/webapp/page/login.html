@@ -92,7 +92,7 @@
                     <div class="row mb-2 w-75 mx-auto">
                         <label class="col-form-label col-lg-3 col-xl-2" for="password">密码</label>
                         <div class="col-lg-9 col-xl-10 position-relative">
-                            <input class="form-control " type="password" id="password" name="password" required onblur="passwordVerify()">
+                            <input class="form-control " type="password" id="password" name="password">
                             <div class="invalid-tooltip">请输入长度4到16的密码！</div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                     <div class="row w-75 mx-auto">
                         <span class="col-lg-3 col-xl-2"></span>
                         <div class="col-lg-9 col-xl-10 position-relative">
-                            <button id="login" type="button" class="btn btn-danger me-4 mb-1 d-block d-xl-inline" onclick="verify()">
+                            <button id="login" type="button" class="btn btn-danger me-4 mb-1 d-block d-xl-inline">
                                 登录
                             </button>
                             <div class="invalid-tooltip">登陆失败</div>
@@ -130,7 +130,7 @@
         let passwordElement = $("#password");
         //判断密码
         function passwordCheck(passwordValue){
-            var len = passwordValue.val().trim().length;
+            let len = passwordValue.val().trim().length;
             if (len <= 4 || len >= 16) {
                 if(!passwordValue.hasClass("is-invalid")){
                     passwordValue.toggleClass("is-invalid")
@@ -142,21 +142,6 @@
                 }
                 return true;
             }
-        }
-
-        function passwordVerify(){
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', '../pwdVerify', true);
-            xhr.send("password=" + this.value);
-            ajax.onreadystatechange = function (data){
-                if (xhr.readyState === 4){
-                    if (xhr.status === 200){
-                        console.log(xhr.responseText);
-                    } else {
-                        console.error(xhr.statusText);
-                    }
-                }
-            };
         }
 
         passwordElement.on("blur", function (){
