@@ -8,10 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/pwdVerify")
-public class PwdVerify extends HttpServlet {
+@WebServlet("/emailVerify")
+public class EmailVerify extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("password"));
+        String email = req.getParameter("email").trim();
+        if(email.equals("admin@qq.com")){
+            resp.addHeader("isEmailTaken", "true");
+        }
     }
 }
