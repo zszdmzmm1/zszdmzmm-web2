@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试导航页</title>
+</head>
+<body>
+    <ul>
+        目录匹配：/user/*
+        <li><a href="../user/aa">/user/aa</a></li>
+        <li><a href="../user/bb">/user/bb</a></li>
+        后缀匹配：*.suffix
+        <li><a href="../user/aa.suffix">../user/aa.suffix</a> (满足目录匹配与后缀匹配，只执行了目录匹配)</li>
+        <li><a href="../aa.suffix">../aa.suffix</a></li>
+        <li><a href="./aa.suffix">./aa.suffix</a></li>
+        任意匹配：/ || /*
+        <li><a href="../all/djf/dsd">../all/djf/dsd</a>(/* 覆盖了 /)</li>
+        request方法
+        <li><a href="../request?abab">request</a></li>
+    </ul>
+</body>
+</html>
