@@ -8,18 +8,30 @@
     <title>测试导航页</title>
 </head>
 <body>
+    <h1>目录匹配：/user/*</h1>
     <ul>
-        目录匹配：/user/*
         <li><a href="../user/aa">/user/aa</a></li>
         <li><a href="../user/bb">/user/bb</a></li>
-        后缀匹配：*.suffix
+    </ul>
+    <h1>后缀匹配：*.suffix</h1>
+    <ul>
         <li><a href="../user/aa.suffix">../user/aa.suffix</a> (满足目录匹配与后缀匹配，只执行了目录匹配)</li>
         <li><a href="../aa.suffix">../aa.suffix</a></li>
         <li><a href="./aa.suffix">./aa.suffix</a></li>
-        任意匹配：/ || /*
+    </ul>
+    <h1>任意匹配：/ || /*</h1>
+    <ul>
         <li><a href="../all/djf/dsd">../all/djf/dsd</a>(/* 覆盖了 /)</li>
-        request方法
+    </ul>
+    <h1>request方法</h1>
+    <ul>
         <li><a href="../request?abab">request</a></li>
+    </ul>
+    <h1>302状态跳转页面</h1>
+    <ul>
+        <li><a href="../redirectOrigin">redirectOrigin</a>初始界面</li>
+        <li><a href="../redirectWWW">redirectWWW</a>跳转界面1 (sendRedirect() 默认302)</li>
+        <li><a href="../redirectHttps">redirectHttps</a>跳转界面2</li>
     </ul>
 </body>
 </html>
