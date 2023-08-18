@@ -23,6 +23,11 @@
       <artifactId>commons-io</artifactId>
       <version>1.4</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.28</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>zszdmzmm_web2</finalName>

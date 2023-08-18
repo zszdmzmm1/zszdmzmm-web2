@@ -13,14 +13,15 @@ import java.util.List;
 
 @WebServlet("/welcome-page")
 public class DynamicHTML extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String message;
-        if(req.getAttribute("user") == null){
-            message = "登陆失败";
+        Object o = req.getAttribute("user");
+        if(o instanceof String){
+            message = (String)o;
             writeUserInfoHTML(resp, message);
-        }else if(req.getAttribute("user") instanceof User){
-            User user = (User)req.getAttribute("user");
+        }else if(o instanceof User user){
             writeUserInfoHTML(resp, user);
         }else{
             List<User> userList = (List<User>) req.getAttribute("user");
