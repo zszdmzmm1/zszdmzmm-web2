@@ -19,10 +19,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getParameter("email").equals("admin@qq.com") && req.getParameter("password").equals("secret")){
-            System.out.println("登陆成功");
-            resp.sendRedirect("./index.html");
+            req.setAttribute("email", req.getParameter("email"));
+            req.getRequestDispatcher("./welcome-page").forward(req, resp);
         }else{
-            System.out.println("登陆失败");
+            req.setAttribute("email", "登陆失败");
+            req.getRequestDispatcher("./welcome-page").forward(req, resp);
         }
     }
 }
