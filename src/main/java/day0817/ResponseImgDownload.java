@@ -20,7 +20,7 @@ public class ResponseImgDownload extends HttpServlet {
         String url = this.getServletContext().getRealPath("./image/QQ图片20230720103937.jpg");
         FileInputStream fis = new FileInputStream(url);
         resp.setContentType("image/png");
-        resp.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode("QQ图片20230720103937.jpg", "GBK"));
+        resp.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode("1.jpg", "GBK"));
         OutputStream sos = resp.getOutputStream();
         IOUtils.copy(fis, sos);
         fis.close();
