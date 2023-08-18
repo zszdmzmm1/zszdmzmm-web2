@@ -58,11 +58,11 @@ public class JDBCConnection {
         return userList;
     }
 
-    public void add(Connection connection) {
+    public void add(Connection connection, User user) {
         String insertSql = "insert into user(email, password) values(?, ?);";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
-            ppstmt.setString(1, "alex");
-            ppstmt.setInt(2, 50);
+            ppstmt.setString(1, user.getEmail());
+            ppstmt.setString(2, user.getPassword());
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
