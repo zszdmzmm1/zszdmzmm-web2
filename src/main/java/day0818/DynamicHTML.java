@@ -8,28 +8,61 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+
 
 @WebServlet("/welcome-page")
 public class DynamicHTML extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getAttribute("email").toString();
-        PrintWriter writer = resp.getWriter();
-        writer.write("<!DOCTYPE html>");
-        writer.write("<html lang='en'>");
-        writer.write("<head>");
-        writer.write("<meta charset='UTF-8'>");
-        writer.write("<title>" + email  + "</title>");
-        writer.write("</head>");
-        writer.write("<body>");
-        writer.write("<div> welcome " + email + "!</div>");
-        writer.write("</body>");
-        writer.write("</html>");
+        String message;
+        if(req.getAttribute("user") == null){
+            message = "登陆失败";
+            writeUserInfoHTML(resp, message);
+        }else if(req.getAttribute("user") instanceof User){
+            User user = (User)req.getAttribute("user");
+            writeUserInfoHTML(resp, user);
+        }else{
+            List<User> userList = (List<User>) req.getAttribute("user");
+            for (User user : userList){
+                writeUserInfoHTML(resp, user);
+            }
+        }
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doGet(req, resp);
+    }
+
+    public void writeUserInfoHTML(HttpServletResponse resp, User user) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        writer.write("<!DOCTYPE html>");
+        writer.write("<html lang='en'>");
+        writer.write("<head>");
+        writer.write("<meta charset='UTF-8'>");
+        writer.write("<title>" + user.getEmail()  + "</title>");
+        writer.write("</head>");
+        writer.write("<body>");
+        writer.write("<div> email: " + user.getEmail() + "</div>");
+        writer.write("<div> password: " + user.getPassword() + "</div>");
+        writer.write("<div>------------------------------------------</div>");
+        writer.write("</body>");
+        writer.write("</html>");
+    }
+
+    public void writeUserInfoHTML(HttpServletResponse resp, String message) throws IOException {
+        PrintWriter writer = resp.getWriter();
+        writer.write("<!DOCTYPE html>");
+        writer.write("<html lang='en'>");
+        writer.write("<head>");
+        writer.write("<meta charset='UTF-8'>");
+        writer.write("<title>" + message  + "</title>");
+        writer.write("</head>");
+        writer.write("<body>");
+        writer.write("<div>" + message + "</div>");
+        writer.write("</body>");
+        writer.write("</html>");
     }
 }
