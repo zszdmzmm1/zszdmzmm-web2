@@ -5,28 +5,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 
 
 @WebServlet("/img")
-public class ResponseImg extends HttpServlet {
+public class ResponseImgDownload extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = this.getServletContext().getRealPath("./image/QQ图片20230720103937.jpg");
-        BufferedImage buffImg = ImageIO.read(new FileInputStream(url));
+        FileInputStream fis = new FileInputStream(url);
         resp.setContentType("image/png");
         resp.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode("QQ图片20230720103937.jpg", "GBK"));
         OutputStream sos = resp.getOutputStream();
-        ImageIO.write(buffImg, "png", sos);
-        sos.close();
+        IOUtils.copy(fis, sos);
+        fis.close();
     }
 
     @Override
