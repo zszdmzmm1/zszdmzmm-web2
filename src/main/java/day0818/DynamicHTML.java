@@ -16,10 +16,8 @@ public class DynamicHTML extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String message;
         Object o = req.getAttribute("user");
-        if(o instanceof String){
-            message = (String)o;
+        if(o instanceof String message){
             writeUserInfoHTML(resp, message);
         }else if(o instanceof User user){
             writeUserInfoHTML(resp, user);

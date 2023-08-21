@@ -68,11 +68,4 @@ public class JDBCConnection {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        JDBCConnection jdbcTest = new JDBCConnection();
-        Connection connection = jdbcTest.getConnection();
-/*        jdbcTest.add(connection);
-        jdbcTest.testPreparedStatement(connection);*/
-    }
 }

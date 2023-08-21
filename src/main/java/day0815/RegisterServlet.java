@@ -10,12 +10,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 
 @WebServlet("/register-verify")
 public class RegisterServlet extends HttpServlet {
     JDBCConnection jdbcConnection = new JDBCConnection();
     Connection connection = jdbcConnection.getConnection();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,6 @@ public class RegisterServlet extends HttpServlet {
             req.setAttribute("user", "该用户已存在！");
         }else {
             user = new User(req.getParameter("email"), req.getParameter("password"), "用户");
-            System.out.println(req.getParameter("password"));
             jdbcConnection.add(connection, user);
             req.setAttribute("user", user);
         }

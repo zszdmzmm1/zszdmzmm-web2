@@ -2,7 +2,6 @@ package day0815;
 
 import day0818.JDBCConnection;
 import day0818.User;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-@WebServlet("/verify")
+@WebServlet("/login-verify")
 public class LoginServlet extends HttpServlet {
     JDBCConnection jdbcConnection = new JDBCConnection();
     Connection connection = jdbcConnection.getConnection();
