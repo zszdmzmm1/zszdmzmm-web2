@@ -141,7 +141,8 @@
         function emailVerify() {
             let element = document.createElement("div");
             element.innerText = "该邮箱已被注册！";
-            element.className = "text-danger"
+            element.className = "text-danger";
+            element.setAttribute("id", "email-check")
             let xhr = new XMLHttpRequest();
             xhr.open('POST', '../emailVerify', true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -149,7 +150,9 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200 && xhr.getResponseHeader("isEmailTaken") === "true") {
                     console.log("add");
-                    document.getElementById("email").after(element)
+                    if(!document.getElementById("email-check")){
+                        document.getElementById("email").after(element);
+                    }
                 }
 
             }
