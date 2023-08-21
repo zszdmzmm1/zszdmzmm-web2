@@ -13,22 +13,26 @@
     <title>list</title>
 </head>
 <body>
-    <%!
-        public StringBuilder addHTML(){
-            StringBuilder HTML = new StringBuilder();
-            List<User> userList = new ArrayList<User>();
-            userList.add(new User("Tom", "123", "cat"));
-            userList.add(new User("Jerry", "123", "mouse"));
-            userList.add(new User("z", "123", "man"));
-            for (int i = 0; i < userList.size(); i++) {
-                HTML.append("<tr><td>").append(i).append("</td><td>").append(userList.get(i).getEmail()).append("</td><td>").append(userList.get(i).getPassword()).append("</td></tr>");
-            }
-            return HTML;
-        }
+    <%
+        List<User> userList = new ArrayList<User>();
+        userList.add(new User("Tom", "123", "cat"));
+        userList.add(new User("Jerry", "123", "mouse"));
+        userList.add(new User("z", "123", "man"));
     %>
     <div>
         <table>
-            <%=addHTML()%>
+            <%
+                for (int i = 0; i < userList.size(); i++) {
+                    User user = userList.get(i);
+            %>
+            <tr>
+                <td><%=i + 1%></td>
+                <td><%=user.getEmail()%></td>
+                <td><%=user.getPassword()%></td>
+            </tr>
+            <%
+                }
+            %>
         </table>
     </div>
 </body>
