@@ -71,7 +71,7 @@
         </nav>
     </header>
     <main class="container w-50 p-4 mx-auto mb-5">
-        <form action="../register-verify" method="post" class="card">
+        <form action="../jsp/login.jsp" method="post" class="card">
             <div class="card-header">注册</div>
             <div class="card-body">
                 <div class="row mb-2 w-75 mx-auto mb-4">
@@ -157,7 +157,6 @@
 
             }
         }
-
         userElement.on("blur", function () {
             check($(this));
         })
@@ -165,8 +164,6 @@
         passwordElement.on("blur", function () {
             check($(this));
         })
-
-
         $("#register").on("click", function () {
             if (check(userElement) && check(passwordElement)) {
                 $(this).prop("type", "submit");
