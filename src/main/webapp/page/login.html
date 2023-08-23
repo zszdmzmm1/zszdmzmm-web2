@@ -5,8 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="http://localhost:8080/zszdmzmm_web2_war/">
     <title>登录</title>
-    <link rel="stylesheet" href="../build/assets/app.css">
+    <link rel="stylesheet" href="build/assets/app.css">
 </head>
 <body>
     <div class="vh-100 px-2 mb-5 d-flex flex-column justify-content-between">
@@ -15,8 +16,8 @@
             <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5 shadow">
                 <div class="container-fluid">
                     <div class="navbar-brand">
-                        <img src="../image/QQ图片20230720103937.jpg" alt="头像" height="40" >
-                        <a href="../index.html" class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
+                        <img src="image/QQ图片20230720103937.jpg" alt="头像" height="40" >
+                        <a href="index.html" class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -62,14 +63,13 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <form action="../jsp/login.jsp" method="post" class="card">
+            <form action="homepage" method="post" class="card">
                 <div class="card-header">登录</div>
                 <div class="card-body">
                     <div class="d-flex justify-content-center mb-2 flex-column text-center flex-md-row">
@@ -111,7 +111,7 @@
                             </button>
                             <div class="invalid-tooltip">登陆失败</div>
                             <a href="" class="text-decoration-none text-body-secondary fs-6 me-4 d-block d-xl-inline mb-1">忘记密码</a>
-                            <a href="./register.html" class="text-decoration-none text-body-secondary fs-6 d-block d-xl-inline mb-1">注册新账号</a>
+                            <a href="page/register.html" class="text-decoration-none text-body-secondary fs-6 d-block d-xl-inline mb-1">注册新账号</a>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
     </div>
 
 
-    <script src="../build/assets/app.js"></script>
+    <script src="build/assets/app.js"></script>
     <script>
         let passwordElement = $("#password");
         //判断密码
