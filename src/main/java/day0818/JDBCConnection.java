@@ -68,4 +68,26 @@ public class JDBCConnection {
             e.printStackTrace();
         }
     }
+
+    public void delete(Connection connection, String email){
+        String insertSql = "delete from user where email = ?;";
+        try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+            ppstmt.setString(1, email);
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Connection connection, User user, String email, String password){
+        String insertSql = "update user set email = ? , password = ? where email = ?;";
+        try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+            ppstmt.setString(1, email);
+            ppstmt.setString(2, password);
+            ppstmt.setString(3, user.getEmail());
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
