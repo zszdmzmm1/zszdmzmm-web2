@@ -25,24 +25,28 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = jdbcConnection.getUser(connection, req.getParameter("email"));
+        String url;
         if(user == null){
             req.setAttribute("message", "未找到该用户！");
             req.setAttribute("type", 1);
+            url = "./page/user-info.jsp";
         }else{
             if(req.getParameter("password").equals(user.getPassword())){
                 if(user.getRole().equals("管理员")){
                     List<User> userList = jdbcConnection.getAllUser(connection);
                     req.setAttribute("userList", userList);
-                    req.setAttribute("type", 2);
+                    url = "./page/admin.jsp";
                 } else{
                     req.setAttribute("user", user);
                     req.setAttribute("type", 3);
+                    url = "./page/user-info.jsp";
                 }
             } else {
                 req.setAttribute("message", "密码错误！");
                 req.setAttribute("type", 1);
+                url = "./page/user-info.jsp";
             }
         }
-        req.getRequestDispatcher("./page/user-info.jsp").forward(req, resp);
+        req.getRequestDispatcher(url).forward(req, resp);
     }
 }
