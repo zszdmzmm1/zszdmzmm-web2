@@ -10,6 +10,10 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理员控制台</title>
     <base href="http://localhost:8080/zszdmzmm_web2_war/">
     <link rel="stylesheet" href="build/assets/app.css">
@@ -133,10 +137,22 @@
                             <div class="col-2">#</div>
                             <div class="col-5">邮箱</div>
                             <div class="col-4">密码</div>
-                            <div class="col-1 text-end">添加</div>
+                            <div class="col-1 text-end" id="add-trigger">添加</div>
                         </div>
+                        <form class="border border-1 rounded-2 p-2 my-3 bg-light update_form" id="add"
+                              style="display: none;">
+                            <div class="mb-3">
+                                <label for="add-email" class="form-label">邮箱</label>
+                                <input type="email" class="form-control" id="add-email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="add-password" class="form-label">密码</label>
+                                <input type="password" class="form-control" id="add-password">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="add-submit">添加</button>
+                        </form>
                         <c:forEach items="${userList}" var="user" varStatus="status">
-                            <div class="row border-bottom border-top border-2 py-4" id="${user.getEmail()}">
+                            <div class="row border-bottom border-top border-2 py-4" id="${user.getId()}">
                                 <div class="col-2">${status.count}</div>
                                 <div class="col-5">${user.getEmail()}</div>
                                 <div class="col-4">${user.getPassword()}</div>
@@ -144,6 +160,21 @@
                                     <span class="me-1 delete">删除</span>
                                     <span class="update">修改</span>
                                 </div>
+                                <form class="border border-1 rounded-2 p-2 my-3 bg-light update_form"
+                                      id="${user.getId()}-update" style="display: none;">
+                                    <div class="mb-3">
+                                        <label for="update-${user.getId()}" class="form-label">邮箱</label>
+                                        <input type="email" class="form-control" id="update-${user.getId()}"
+                                               placeholder="不填写可保持不变">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="update-${user.getPassword()}" class="form-label">密码</label>
+                                        <input type="text" class="form-control" id="update-${user.getPassword()}"
+                                               placeholder="不填写可保持不变">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="${user.getId()}-submit">更新
+                                    </button>
+                                </form>
                             </div>
                         </c:forEach>
                     </div>
@@ -166,51 +197,58 @@
     <script src="build/assets/app.js"></script>
     <script>
         $(".delete").click(function () {
-            let email = $(this).parent().parent().attr("id");
+            let id = $(this).parent().parent().attr("id");
             $.ajax({
                 method: "GET",
                 url: "delete",
-                data: {email: email}
+                data: {id: id}
             })
                 .done(function () {
                     window.location.reload();
                     alert("删除成功！");
                 })
-                .error(function () {
+                .fail(function () {
                     alert("something wrong, please check again");
                 })
         });
 
         $(".update").click(function () {
-            let email = $(this).parent().parent().attr("id");
-            if ($(".update_form").length === 0) {
-                $(this).parent().parent().after(`<form class="border border-1 rounded-2 p-2 my-3 bg-light update_form" id=` + email + `_update>
-                                <div class="mb-3">
-                                    <label for="update-email" class="form-label">邮箱</label>
-                                    <input type="email" class="form-control" id="update-email" aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="update-password" class="form-label">密码</label>
-                                    <input type="password" class="form-control" id="update-password">
-                                </div>
-                                <button class="btn btn-primary" id=` + email + `_submit>更新</button>
-                            </form>`);
-            } else {
-                $(this).parent().parent().next().remove();
-            }
-            $(`${"${email}"}_submit`).click(function (){
+            let id = $(this).parent().parent().attr("id");
+            $(`#${"${id}"}-update`).toggle();
+            $(`#${"${id}"}-submit`).click(function () {
+                let email = $(this).prev().prev().find("input").val();
+                let password = $(this).prev().find("input").val();
                 $.ajax({
                     method: "GET",
                     url: "update",
-                    data: {email: email}
+                    data: {id: id, email: email, password: password}
                 })
-                    .done(function (){
+                    .done(function () {
                         window.location.reload();
                         alert("更新成功！");
                     })
-                    .error(function (){
+                    .fail(function () {
                         alert("something wrong, please check again");
+                    })
+            })
+        });
+
+        $("#add-trigger").click(function () {
+            $("#add").toggle();
+            $("#add-submit").click(function () {
+                let email = $("#add-email").val();
+                let password = $("#add-password").val();
+                $.ajax({
+                    method: "GET",
+                    url: "add",
+                    data: {email: email, password: password}
+                })
+                    .done(function () {
+                        window.location.reload();
+                        alert("增加成功！");
+                    })
+                    .fail(function () {
+                        alert("账号或密码不能为空！");
                     })
             })
         });

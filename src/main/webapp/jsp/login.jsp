@@ -22,7 +22,7 @@
         boolean isQualified = true;
         boolean isAdmin = false;
         public void LoginInit(String email, String password){
-            User user = jdbcConnection.getUser(connection, email);
+            User user = jdbcConnection.getUserByEmail(connection, email);
             if (user == null) {
                 message = "用户不存在";
                 isQualified = false;
@@ -39,7 +39,7 @@
             }
         }
         public void RegisterInit(String email){
-            User user = jdbcConnection.getUser(connection, email);
+            User user = jdbcConnection.getUserByEmail(connection, email);
             if (user != null) {
                 message = "邮箱已被占用";
                 isQualified = false;

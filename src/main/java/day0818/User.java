@@ -1,6 +1,7 @@
 package day0818;
 
 public class User {
+    String id;
     String email;
     String password;
     String role;
@@ -9,6 +10,17 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String id, String email, String password, String role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getEmail() {

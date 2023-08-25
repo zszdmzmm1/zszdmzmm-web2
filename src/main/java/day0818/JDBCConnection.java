@@ -25,15 +25,35 @@ public class JDBCConnection {
         return conn;
     }
 
-    public User getUser(Connection connection, String email) {
-        String query = "select email, password, role from user where email = ?";
+    public User getUserByEmail(Connection connection, String email) {
+        String query = "select id, password, role from user where email = ?";
         try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
             ppstmt.setString(1, email);
             ResultSet rs = ppstmt.executeQuery();
             if (rs.next()) {
+                String id = "u" + rs.getInt("id");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
-                return new User(email, password, role);
+                return new User(id, email, password, role);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public User getUserById(Connection connection, int id) {
+        String query = "select email, password, role from user where id = ?";
+        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+            ppstmt.setInt(1, id);
+            ResultSet rs = ppstmt.executeQuery();
+            if (rs.next()) {
+                String sId = "u" + id;
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                return new User(sId, email, password, role);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,15 +62,16 @@ public class JDBCConnection {
     }
 
     public List<User> getAllUser(Connection connection){
-        String query = "select email, password, role from user";
+        String query = "select id, email, password, role from user";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
             ResultSet rs = ppstmt.executeQuery();
             while (rs.next()) {
+                String id = "u" + rs.getInt("id");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
-                userList.add(new User(email, password, role));
+                userList.add(new User(id, email, password, role));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,22 +90,22 @@ public class JDBCConnection {
         }
     }
 
-    public void delete(Connection connection, String email){
-        String insertSql = "delete from user where email = ?;";
+    public void delete(Connection connection, int id){
+        String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
-            ppstmt.setString(1, email);
+            ppstmt.setInt(1, id);
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void update(Connection connection, User user, String email, String password){
-        String insertSql = "update user set email = ? , password = ? where email = ?;";
+    public void update(Connection connection, int id, String email, String password){
+        String insertSql = "update user set email = ? , password = ? where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setString(1, email);
             ppstmt.setString(2, password);
-            ppstmt.setString(3, user.getEmail());
+            ppstmt.setInt(3, id);
             ppstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = jdbcConnection.getUser(connection, req.getParameter("email"));
+        User user = jdbcConnection.getUserByEmail(connection, req.getParameter("email"));
         if(user == null){
             req.setAttribute("user", "未找到该用户！");
         }else{
