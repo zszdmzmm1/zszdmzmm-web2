@@ -151,7 +151,7 @@
                             </div>
                             <button type="button" class="btn btn-primary" id="add-submit">添加</button>
                         </form>
-                        <c:forEach items="${userList}" var="user" varStatus="status">
+                        <c:forEach items="${userList}" var="user" begin="1" end="10" varStatus="status">
                             <div class="row border-bottom border-top border-2 py-4" id="${user.getId()}">
                                 <div class="col-2">${status.count}</div>
                                 <div class="col-5">${user.getEmail()}</div>
@@ -168,8 +168,8 @@
                                                placeholder="不填写可保持不变">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="update-${user.getPassword()}" class="form-label">密码</label>
-                                        <input type="text" class="form-control" id="update-${user.getPassword()}"
+                                        <label class="form-label">密码</label>
+                                        <input type="text" class="form-control"
                                                placeholder="不填写可保持不变">
                                     </div>
                                     <button type="button" class="btn btn-primary" id="${user.getId()}-submit">更新
@@ -179,7 +179,21 @@
                         </c:forEach>
                     </div>
                     <div class="card-footer">
-                        Footer
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><span class="page-link">${page}</span></li>
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 
@@ -196,6 +210,7 @@
 
     <script src="build/assets/app.js"></script>
     <script>
+
         $(".delete").click(function () {
             let id = $(this).parent().parent().attr("id");
             $.ajax({

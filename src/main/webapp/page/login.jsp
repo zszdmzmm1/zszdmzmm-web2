@@ -1,4 +1,11 @@
-<!doctype html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 86173
+  Date: 2023/8/26
+  Time: 23:39
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,8 +23,9 @@
             <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5 shadow">
                 <div class="container-fluid">
                     <div class="navbar-brand">
-                        <img src="image/QQ图片20230720103937.jpg" alt="头像" height="40" >
-                        <a href="index.html" class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
+                        <img src="image/QQ图片20230720103937.jpg" alt="头像" height="40">
+                        <a href="index.html"
+                           class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -33,7 +41,8 @@
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-journal-text py-2 nav-item me-1"></i>
-                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="./page/article.html">博客</a>
+                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
+                                   href="./page/article.html">博客</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-github py-2 nav-item me-1"></i>
@@ -69,7 +78,7 @@
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <form action="homepage" method="post" class="card">
+            <form action="homepage" method="post" class="card" id="form-login">
                 <div class="card-header">登录</div>
                 <div class="card-body">
                     <div class="d-flex justify-content-center mb-2 flex-column text-center flex-md-row">
@@ -109,9 +118,11 @@
                             <button id="login" type="button" class="btn btn-danger me-4 mb-1 d-block d-xl-inline">
                                 登录
                             </button>
-                            <div class="invalid-tooltip">登陆失败</div>
-                            <a href="" class="text-decoration-none text-body-secondary fs-6 me-4 d-block d-xl-inline mb-1">忘记密码</a>
-                            <a href="page/register.html" class="text-decoration-none text-body-secondary fs-6 d-block d-xl-inline mb-1">注册新账号</a>
+                            <div class="invalid-tooltip"></div>
+                            <a href=""
+                               class="text-decoration-none text-body-secondary fs-6 me-4 d-block d-xl-inline mb-1">忘记密码</a>
+                            <a href="page/register.html"
+                               class="text-decoration-none text-body-secondary fs-6 d-block d-xl-inline mb-1">注册新账号</a>
                         </div>
                     </div>
                 </div>
@@ -128,36 +139,48 @@
     <script src="build/assets/app.js"></script>
     <script>
         let passwordElement = $("#password");
+
         //判断密码
-        function passwordCheck(passwordValue){
+        function passwordCheck(passwordValue) {
             let len = passwordValue.val().trim().length;
             if (len <= 4 || len >= 16) {
-                if(!passwordValue.hasClass("is-invalid")){
+                if (!passwordValue.hasClass("is-invalid")) {
                     passwordValue.toggleClass("is-invalid")
                 }
                 return false;
             } else {
-                if(passwordValue.hasClass("is-invalid")){
+                if (passwordValue.hasClass("is-invalid")) {
                     passwordValue.toggleClass("is-invalid")
                 }
                 return true;
             }
         }
 
-        passwordElement.on("blur", function (){
+        passwordElement.on("blur", function () {
             passwordCheck($(this));
         })
 
 
-        $("#login").on("click", function (){
-            if(passwordCheck(passwordElement)){
-                $(this).prop("type", "submit");
-            }else{
-                if(!$(this).hasClass("is-invalid")){
-                    $(this).toggleClass("is-invalid");
-                }
-                $(this).prop("type", "button");
-            }
+        $("#login").on("click", function () {
+            let email = $("#email").val();
+            let password = $("#password").val();
+            $.ajax({
+                method: "Post",
+                url: "login-processing",
+                dataType: "json",
+                data: {email: email, password: password}
+            })
+                .done(function (result) {
+                    let message = result.message;
+                    if (message === "验证成功！") {
+                        $("#form-login").submit();
+                    } else {
+                        $(".invalid-tooltip").text(message);
+                        if (!$("#login").hasClass("is-invalid")) {
+                            $("#login").toggleClass("is-invalid");
+                        }
+                    }
+                })
         })
     </script>
 </body>

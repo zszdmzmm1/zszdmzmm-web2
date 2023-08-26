@@ -65,18 +65,36 @@ public class JDBCConnection {
         String query = "select id, email, password, role from user";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
-            ResultSet rs = ppstmt.executeQuery();
-            while (rs.next()) {
-                String id = "u" + rs.getInt("id");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                String role = rs.getString("role");
-                userList.add(new User(id, email, password, role));
-            }
+            readGetUserResult(userList, ppstmt);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return userList;
+    }
+
+
+    public List<User> getAPageUser(Connection connection, int page){
+        int beginIndex = (page - 1) * 10;
+        String query = "select id, email, password, role from user limit ?, 10";
+        List<User> userList = new ArrayList<>();
+        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+            ppstmt.setInt(1, beginIndex);
+            readGetUserResult(userList, ppstmt);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    private void readGetUserResult(List<User> userList, PreparedStatement ppstmt) throws SQLException {
+        ResultSet rs = ppstmt.executeQuery();
+        while (rs.next()) {
+            String id = "u" + rs.getInt("id");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
+            userList.add(new User(id, email, password, role));
+        }
     }
 
     public void add(Connection connection, User user) {
