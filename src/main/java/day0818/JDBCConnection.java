@@ -72,10 +72,23 @@ public class JDBCConnection {
         return userList;
     }
 
+    public int getUserCount(Connection connection) {
+        String query = "select count(*) from user";
+        int count = 0;
+        try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("count(*)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public List<User> getAPageUser(Connection connection, int page){
         int beginIndex = (page - 1) * 10;
-        String query = "select id, email, password, role from user limit ?, 11";
+        String query = "select id, email, password, role from user limit ?, 10";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
             ppstmt.setInt(1, beginIndex);

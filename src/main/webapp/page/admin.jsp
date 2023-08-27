@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="build/assets/app.css">
 </head>
 <body class="sidebar-mini" style="height: auto;">
-
     <div class="wrapper">
 
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -37,20 +36,14 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-            <a href="../../index3.html" class="brand-link">
-                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a>
-
             <div class="sidebar">
 
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="./image/QQ图片20230720103937.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">管理员</a>
                     </div>
                 </div>
 
@@ -68,19 +61,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard v1</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard v2</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index3.html" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard v3</p>
                                     </a>
@@ -91,7 +84,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon far fa-plus-square"></i>
                                 <p>
-                                    Admin
+                                    管理员
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -99,7 +92,7 @@
                                 <li class="nav-item">
                                     <a href="../examples/blank.html" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Blank Page</p>
+                                        <p>用户列表</p>
                                     </a>
                                 </li>
                             </ul>
@@ -121,8 +114,21 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#"></a></li>
-                                <li class="breadcrumb-item active"></li>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><span class="page-link">${page}</span></li>
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </ol>
                         </div>
                     </div>
@@ -131,7 +137,7 @@
 
             <section class="content">
 
-                <div class="card">
+                <div class="card mb-2">
                     <div class="card-body">
                         <div class="row border-bottom border-3 py-4">
                             <div class="col-2">#</div>
@@ -151,7 +157,7 @@
                             </div>
                             <button type="button" class="btn btn-primary" id="add-submit">添加</button>
                         </form>
-                        <c:forEach items="${userList}" var="user" begin="1" end="10" varStatus="status">
+                        <c:forEach items="${userList}" var="user" varStatus="status">
                             <div class="row border-bottom border-top border-2 py-4" id="${user.getId()}">
                                 <div class="col-2">${status.count + (page - 1) * 10}</div>
                                 <div class="col-5">${user.getEmail()}</div>
@@ -179,28 +185,27 @@
                         </c:forEach>
                     </div>
                     <div class="card-footer">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><span class="page-link">${page}</span></li>
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <span class="text-secondary">当前第${page}页，总计${pageCount}页，共${count}条记录</span>
                     </div>
                 </div>
-
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><span class="page-link">${page}</span></li>
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </section>
 
         </div>
-
         <footer class="main-footer">
             <strong>Design by <a href="https://adminlte.io">zszdmzmm</a>.</strong>
         </footer>
@@ -214,11 +219,15 @@
             let page = ${page};
             if ($(this).attr("aria-label") === "Next") {
                 page += 1;
-                console.log("page=" + page);
-            } else if ($(this).attr("aria-label") === "Previous"){
+            } else if ($(this).attr("aria-label") === "Previous") {
                 page -= 1;
             } else {
                 page = parseInt($(this).text());
+            }
+            if(page < 1){
+                page =  1;
+            }else if (page > ${pageCount}){
+                page = ${pageCount};
             }
             window.location.href = "admin/user?page=" + page;
         })
@@ -226,7 +235,9 @@
         $(document).ready(function () {
             let page = ${page};
             if (page === 1) {
-                $(".pagination li:first-child").remove();
+                $(".pagination li:first-child a").addClass("text-body-secondary");
+            } else if (page === ${pageCount}) {
+                $(".pagination li:last-child a").addClass("text-body-secondary");
             }
         })
 

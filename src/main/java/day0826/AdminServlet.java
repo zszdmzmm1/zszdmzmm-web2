@@ -1,6 +1,5 @@
 package day0826;
 
-import com.alibaba.fastjson.JSONObject;
 import day0818.JDBCConnection;
 import day0818.User;
 import jakarta.servlet.ServletException;
@@ -10,9 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,17 +17,22 @@ import java.util.List;
 public class AdminServlet extends HttpServlet {
     JDBCConnection jdbcConnection = new JDBCConnection();
     Connection connection = jdbcConnection.getConnection();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sPage = req.getParameter("page");
         int page;
-        if(sPage == null){
+        if (sPage == null) {
             page = 1;
-        }else {
+        } else {
             page = Integer.parseInt(sPage);
         }
         List<User> userList = jdbcConnection.getAPageUser(connection, page);
+        int count = jdbcConnection.getUserCount(connection);
+        int pageCount = count / 10 + 1;
+        req.setAttribute("count", count);
         req.setAttribute("page", page);
+        req.setAttribute("pageCount", pageCount);
         req.setAttribute("userList", userList);
         req.getRequestDispatcher("../page/admin.jsp").forward(req, resp);
     }
