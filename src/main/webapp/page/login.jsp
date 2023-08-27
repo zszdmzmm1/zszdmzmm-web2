@@ -174,9 +174,13 @@
             })
                 .done(function (result) {
                     let message = result.message;
-                    if (message === "验证成功！") {
-                        $("#form-login").prop("action", "user/id=" + result.id);
-                        $("#form-login").submit();
+                    let formElement = $("#form-login");
+                    if (message === "管理员") {
+                        formElement.prop("action", "admin/user");
+                        formElement.submit();
+                    } else if (message === "用户") {
+                        formElement.prop("action", "user/" + result.id);
+                        formElement.submit();
                     } else {
                         $(".invalid-tooltip").text(message);
                         if (!$("#login").hasClass("is-invalid")) {

@@ -27,7 +27,12 @@ public class LoginProcessing extends HttpServlet {
         }else{
             jsonObject = (JSONObject) JSONObject.toJSON(user);
             if(req.getParameter("password").equals(user.getPassword())){
-                jsonObject.put("message", "验证成功！");
+                if(user.getRole().equals("管理员")){
+                    jsonObject.put("message", "管理员");
+                }else{
+                    jsonObject.put("message", "用户");
+                    jsonObject.put("id", user.getId());
+                }
             } else {
                 jsonObject.put("message", "密码错误！");
             }
