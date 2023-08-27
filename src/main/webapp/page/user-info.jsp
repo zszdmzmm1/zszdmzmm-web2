@@ -76,33 +76,10 @@
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <c:if test="${type == 1}">
-                <form action="../homepage" method="post" class="card">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-center mb-2 flex-column flex-md-column">
-                            <div class="text-danger display-5 my-5 align-self-center">${message} </div>
-                            <button class="btn btn-outline-danger my-5"><a href="page/login.html" class="link-body-emphasis text-decoration-none">返回登陆界面</a></button>
-                        </div>
-                    </div>
-                </form>
-            </c:if>
-            <c:if test="${type == 2}">
-                <div class="card d-flex flex-column justify-content-around p-5 ">
-                    <c:forEach items="${userList}" var="user" varStatus="status">
-                        <div class="border-2 border-danger rounded-2 m-2 p-1">
-                            <div>${status.count}</div>
-                            <div>email: ${user.getEmail()}</div>
-                            <div>password: ${user.getPassword()}</div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:if>
-            <c:if test="${type == 3}">
-                <div class="card p-5">
-                    <div>email: ${user.getEmail()}</div>
-                    <div>password: ${user.getPassword()}</div>
-                </div>
-            </c:if>
+            <div class="card p-5">
+                <div>email: ${user.getEmail()}</div>
+                <div>password: ${user.getPassword()}</div>
+            </div>
         </main>
         <footer class="mt-5 border-top text-center p-3">
             <p class="d-inline text-body-secondary">Designed by</p>

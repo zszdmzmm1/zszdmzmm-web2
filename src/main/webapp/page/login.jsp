@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -78,7 +80,7 @@
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <form action="homepage" method="post" class="card" id="form-login">
+            <form method="post" class="card" id="form-login">
                 <div class="card-header">登录</div>
                 <div class="card-body">
                     <div class="d-flex justify-content-center mb-2 flex-column text-center flex-md-row">
@@ -173,6 +175,7 @@
                 .done(function (result) {
                     let message = result.message;
                     if (message === "验证成功！") {
+                        $("#form-login").prop("action", "user/id=" + result.id);
                         $("#form-login").submit();
                     } else {
                         $(".invalid-tooltip").text(message);

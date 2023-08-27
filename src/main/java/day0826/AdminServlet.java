@@ -1,7 +1,6 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
 import day0818.JDBCConnection;
 import day0818.User;
 import jakarta.servlet.ServletException;
@@ -13,28 +12,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/login-processing")
-public class LoginProcessing extends HttpServlet {
+
+@WebServlet("/admin/user")
+public class AdminServlet extends HttpServlet {
     JDBCConnection jdbcConnection = new JDBCConnection();
     Connection connection = jdbcConnection.getConnection();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = jdbcConnection.getUserByEmail(connection, req.getParameter("email"));
-        JSONObject jsonObject = new JSONObject();
-        if(user == null){
-            jsonObject.put("message", "未找到该用户！");
-        }else{
-            jsonObject = (JSONObject) JSONObject.toJSON(user);
-            if(req.getParameter("password").equals(user.getPassword())){
-                jsonObject.put("message", "验证成功！");
-            } else {
-                jsonObject.put("message", "密码错误！");
-            }
+        String sPage = req.getParameter("page");
+        int page;
+        if(sPage == null){
+            page = 1;
+        }else {
+            page = Integer.parseInt(sPage);
         }
-        PrintWriter out = resp.getWriter();
-        out.println(jsonObject);
-        out.close();
+        List<User> userList = jdbcConnection.getAPageUser(connection, page);
+        req.setAttribute("page", page);
+        req.setAttribute("userList", userList);
+        req.getRequestDispatcher("../page/admin.jsp").forward(req, resp);
     }
 
     @Override

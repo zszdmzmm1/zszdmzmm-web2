@@ -153,7 +153,7 @@
                         </form>
                         <c:forEach items="${userList}" var="user" begin="1" end="10" varStatus="status">
                             <div class="row border-bottom border-top border-2 py-4" id="${user.getId()}">
-                                <div class="col-2">${status.count}</div>
+                                <div class="col-2">${status.count + (page - 1) * 10}</div>
                                 <div class="col-5">${user.getEmail()}</div>
                                 <div class="col-4">${user.getPassword()}</div>
                                 <div class="col-1 text-end">
@@ -210,6 +210,26 @@
 
     <script src="build/assets/app.js"></script>
     <script>
+        $(".page-link").click(function () {
+            let page = ${page};
+            if ($(this).attr("aria-label") === "Next") {
+                page += 1;
+                console.log("page=" + page);
+            } else if ($(this).attr("aria-label") === "Previous"){
+                page -= 1;
+            } else {
+                page = parseInt($(this).text());
+            }
+            window.location.href = "admin/user?page=" + page;
+        })
+
+        $(document).ready(function () {
+            let page = ${page};
+            if (page === 1) {
+                $(".pagination li:first-child").remove();
+            }
+        })
+
 
         $(".delete").click(function () {
             let id = $(this).parent().parent().attr("id");

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * 目录匹配
  */
-@WebServlet("/user/*")
+//@WebServlet("/user/*")
 public class URLMatch1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
