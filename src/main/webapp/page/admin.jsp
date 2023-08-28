@@ -116,17 +116,21 @@
                             <ol class="breadcrumb float-sm-right">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
+                                        <c:if test="${page != 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
                                         <li class="page-item"><span class="page-link">${page}</span></li>
-                                        <li class="page-item">
-                                            <a class="page-link" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
+                                        <c:if test="${page != pageCount}">
+                                            <li class="page-item">
+                                                <a class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
                                     </ul>
                                 </nav>
                             </ol>
@@ -190,17 +194,21 @@
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
+                        <c:if test="${page != 1}">
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
                         <li class="page-item"><span class="page-link">${page}</span></li>
-                        <li class="page-item">
-                            <a class="page-link" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <c:if test="${page != pageCount}">
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
                     </ul>
                 </nav>
             </section>
@@ -232,30 +240,24 @@
             window.location.href = "admin/user?page=" + page;
         })
 
-        $(document).ready(function () {
-            let page = ${page};
-            if (page === 1) {
-                $(".pagination li:first-child a").addClass("text-body-secondary");
-            } else if (page === ${pageCount}) {
-                $(".pagination li:last-child a").addClass("text-body-secondary");
-            }
-        })
-
 
         $(".delete").click(function () {
-            let id = $(this).parent().parent().attr("id");
-            $.ajax({
-                method: "GET",
-                url: "delete",
-                data: {id: id}
-            })
-                .done(function () {
-                    window.location.reload();
-                    alert("删除成功！");
+            let isConfirm = confirm("是否确定删除？");
+            if(isConfirm){
+                let id = $(this).parent().parent().attr("id");
+                $.ajax({
+                    method: "GET",
+                    url: "delete",
+                    data: {id: id}
                 })
-                .fail(function () {
-                    alert("something wrong, please check again");
-                })
+                    .done(function () {
+                        window.location.reload();
+                        alert("删除成功！");
+                    })
+                    .fail(function () {
+                        alert("something wrong, please check again");
+                    })
+            }
         });
 
         $(".update").click(function () {

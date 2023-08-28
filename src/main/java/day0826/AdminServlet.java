@@ -29,7 +29,12 @@ public class AdminServlet extends HttpServlet {
         }
         List<User> userList = jdbcConnection.getAPageUser(connection, page);
         int count = jdbcConnection.getUserCount(connection);
-        int pageCount = count / 10 + 1;
+        int pageCount;
+        if(count % 10 == 0){
+            pageCount = count / 10;
+        }else{
+            pageCount = count / 10 + 1;
+        }
         req.setAttribute("count", count);
         req.setAttribute("page", page);
         req.setAttribute("pageCount", pageCount);
