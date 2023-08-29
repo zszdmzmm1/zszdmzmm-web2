@@ -1,11 +1,11 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
 import day0818.JDBCConnection;
 import day0818.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +32,14 @@ public class LoginProcessing extends HttpServlet {
                 }else{
                     jsonObject.put("message", "用户");
                     jsonObject.put("id", user.getId());
+                }
+                if("true".equals(req.getParameter("isRemember"))){
+                    Cookie cookie = new Cookie("email", req.getParameter("email"));
+                    Cookie cookie1 = new Cookie("password", req.getParameter("password"));
+                    cookie.setMaxAge(60 * 60 * 12);
+                    cookie1.setMaxAge(60 * 60 * 12);
+                    resp.addCookie(cookie);
+                    resp.addCookie(cookie1);
                 }
             } else {
                 jsonObject.put("message", "密码错误！");

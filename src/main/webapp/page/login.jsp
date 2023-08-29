@@ -48,8 +48,7 @@
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-github py-2 nav-item me-1"></i>
-                                <div class="nav-item dropdown" onmouseleave="dropDownMenuHidden()"
-                                     onmouseenter="dropDownMenuShow()">
+                                <div class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle me-3 py-2 text-decoration-none link-body-emphasis"
                                        href="https://github.com/zszdmzmm1" role="button"
                                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,13 +96,13 @@
                     <div class="row mb-2 w-75 mx-auto">
                         <label class="col-form-label col-lg-3 col-xl-2" for="email">邮箱</label>
                         <div class="col-lg-9 col-xl-10">
-                            <input class="form-control" type="email" id="email" name="email" required>
+                            <input class="form-control" type="email" id="email" name="email" required value=${cookie.email.value}>
                         </div>
                     </div>
                     <div class="row mb-2 w-75 mx-auto">
                         <label class="col-form-label col-lg-3 col-xl-2" for="password">密码</label>
                         <div class="col-lg-9 col-xl-10 position-relative">
-                            <input class="form-control " type="password" id="password" name="password">
+                            <input class="form-control " type="password" id="password" name="password" value="${cookie.password.value}">
                             <div class="invalid-tooltip">请输入长度4到16的密码！</div>
                         </div>
                     </div>
@@ -158,6 +157,7 @@
             }
         }
 
+
         passwordElement.on("blur", function () {
             passwordCheck($(this));
         })
@@ -166,11 +166,12 @@
         $("#login").on("click", function () {
             let email = $("#email").val();
             let password = $("#password").val();
+            let isRemember = $("#password-log").is(':checked');
             $.ajax({
                 method: "Post",
                 url: "login-processing",
                 dataType: "json",
-                data: {email: email, password: password}
+                data: {email: email, password: password, isRemember: isRemember}
             })
                 .done(function (result) {
                     let message = result.message;

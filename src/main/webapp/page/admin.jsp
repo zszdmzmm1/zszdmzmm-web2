@@ -23,9 +23,10 @@
 
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
+
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars">收</i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="page/login.html" class="nav-link">退出登录</a>
@@ -232,9 +233,9 @@
             } else {
                 page = parseInt($(this).text());
             }
-            if(page < 1){
-                page =  1;
-            }else if (page > ${pageCount}){
+            if (page < 1) {
+                page = 1;
+            } else if (page > ${pageCount}) {
                 page = ${pageCount};
             }
             window.location.href = "admin/user?page=" + page;
@@ -243,7 +244,7 @@
 
         $(".delete").click(function () {
             let isConfirm = confirm("是否确定删除？");
-            if(isConfirm){
+            if (isConfirm) {
                 let id = $(this).parent().parent().attr("id");
                 $.ajax({
                     method: "GET",
