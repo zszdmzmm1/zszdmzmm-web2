@@ -5,10 +5,7 @@ import day0818.JDBCConnection;
 import day0818.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,6 +41,8 @@ public class LoginProcessing extends HttpServlet {
                     resp.addCookie(cookie1);
                     resp.addCookie(cookie2);
                 }
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
             } else {
                 jsonObject.put("message", "密码错误！");
             }
