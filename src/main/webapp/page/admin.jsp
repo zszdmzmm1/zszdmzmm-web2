@@ -26,10 +26,10 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars">收</i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="">收</i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="page/login.html" class="nav-link">退出登录</a>
+                    <a href="login" class="nav-link">退出登录</a>
                 </li>
             </ul>
         </nav>
