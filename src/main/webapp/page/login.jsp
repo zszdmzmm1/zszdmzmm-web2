@@ -109,7 +109,7 @@
                     <div class="row w-75 mx-auto mb-2">
                         <span class="col-lg-3 col-xl-2"></span>
                         <div class="col-lg-9 col-xl-10">
-                            <input id="password-log" type="checkbox">
+                            <input id="password-log" type="checkbox" ${cookie.isChecked.value}>
                             <label for="password-log">记住密码</label>
                         </div>
                     </div>

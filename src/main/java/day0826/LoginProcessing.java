@@ -36,10 +36,13 @@ public class LoginProcessing extends HttpServlet {
                 if("true".equals(req.getParameter("isRemember"))){
                     Cookie cookie = new Cookie("email", req.getParameter("email"));
                     Cookie cookie1 = new Cookie("password", req.getParameter("password"));
+                    Cookie cookie2 = new Cookie("isChecked", "checked");
                     cookie.setMaxAge(60 * 60 * 12);
                     cookie1.setMaxAge(60 * 60 * 12);
+                    cookie2.setMaxAge(60 * 60 * 12);
                     resp.addCookie(cookie);
                     resp.addCookie(cookie1);
+                    resp.addCookie(cookie2);
                 }
             } else {
                 jsonObject.put("message", "密码错误！");
