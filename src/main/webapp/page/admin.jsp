@@ -29,7 +29,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="">收</i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="login" class="nav-link">退出登录</a>
+                    <span href="login" class="nav-link" id="logout">退出登录</span>
                 </li>
             </ul>
         </nav>
@@ -218,7 +218,6 @@
         <footer class="main-footer">
             <strong>Design by <a href="https://adminlte.io">zszdmzmm</a>.</strong>
         </footer>
-
     </div>
 
 
@@ -301,6 +300,16 @@
                     })
             })
         });
+
+        $("#logout").click(function (){
+            $.ajax({
+                method: "GET",
+                url: "logout"
+            })
+                .done(function (){
+                    window.location.reload();
+                })
+        })
     </script>
 </body>
 </html>
