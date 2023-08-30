@@ -23,7 +23,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user =(User)session.getAttribute("user");
-        if(user == null){
+        if(!"管理员".equals(user.getRole())){
             resp.sendRedirect("../login");
             return;
         }
