@@ -13,13 +13,6 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user = (User)session.getAttribute("user");
-        if(user == null){
-            resp.sendRedirect("../login");
-            return;
-        }
-        req.setAttribute("user", user);
         req.getRequestDispatcher("../page/user-info.jsp").forward(req, resp);
     }
 

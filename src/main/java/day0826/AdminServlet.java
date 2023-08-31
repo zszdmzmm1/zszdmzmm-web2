@@ -21,12 +21,6 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user =(User)session.getAttribute("user");
-        if(!"管理员".equals(user.getRole())){
-            resp.sendRedirect("../login");
-            return;
-        }
         String sPage = req.getParameter("page");
         int page;
         if (sPage == null) {

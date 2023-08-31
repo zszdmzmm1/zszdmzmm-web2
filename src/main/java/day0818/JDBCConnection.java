@@ -121,6 +121,18 @@ public class JDBCConnection {
         }
     }
 
+    public void addUserLog(Connection connection, UserLog userLog){
+        String insertSql = "insert into `user-log`(`user-id`, time, behavior) values(?, ?, ?);";
+        try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
+            ppstmt.setInt(1, userLog.getUserId());
+            ppstmt.setString(2, userLog.getTime());
+            ppstmt.setString(3, userLog.getBehavior());
+            ppstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void delete(Connection connection, int id){
         String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {

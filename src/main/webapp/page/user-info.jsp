@@ -94,6 +94,7 @@
                             <div class="card-body">
                                 <div class="my-2">邮箱: ${user.getEmail()}</div>
                                 <div class="my-2">密码: ${user.getPassword()}</div>
+                                <button class="btn btn-danger" id="logout">退出登录</button>
                             </div>
                         </div>
                     </div>
@@ -108,5 +109,16 @@
         </footer>
     </div>
     <script src="build/assets/app.js"></script>
+    <script>
+        $("#logout").click(function (){
+            $.ajax({
+                method: "GET",
+                url: "logout",
+            })
+                .done(function(){
+                    window.location.reload();
+                })
+        })
+    </script>
 </body>
 </html>

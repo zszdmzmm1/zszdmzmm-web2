@@ -1,10 +1,10 @@
 package day0818;
 
 public class User {
-    String id;
-    String email;
-    String password;
-    String role;
+    private String id;
+    private String email;
+    private String password;
+    private String role;
 
     public User(String email, String password, String role) {
         this.email = email;
