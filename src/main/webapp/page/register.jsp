@@ -80,7 +80,7 @@
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <form action="../register" method="post" class="card">
+            <form action="../user/" method="post" class="card">
                 <div class="card-header">注册</div>
                 <div class="card-body">
                     <div class="row mb-2 w-75 mx-auto mb-4">
@@ -111,9 +111,10 @@
                         <label class="col-form-label col-lg-3 col-xxl-2 text-lg-end text-start"
                                for="verify-code">验证码</label>
                         <div class="col-lg-9 col-xxl-10 position-relative">
-                            <input class="form-control mb-3" type="password" id="verify-code" name="verify-code"
+                            <input class="form-control mb-3" type="text" id="verify-code" name="verify-code"
                                    required>
-                            <img src="../setVerifyCodeServlet" alt="验证" onclick="this.src='../verifyImgServlet?'+ Math.random()">
+                            <img src="../setVerifyCodeServlet" alt="验证"
+                                 onclick="this.src='../verifyImgServlet?'+ Math.random()">
                         </div>
                     </div>
                     <div class="row w-75 mx-auto">
@@ -136,10 +137,6 @@
 
         <script src="../build/assets/app.js"></script>
         <script>
-            let passwordElement = $("#password");
-            let userElement = $("#user");
-
-            //
 
             function check(value) {
                 let len = value.val().trim().length;
@@ -156,22 +153,21 @@
                 }
             }
 
-            document.getElementById("user").addEventListener("click", function () {
-                document.getElementById("user").value = document.getElementById("user").placeholder;
+            $("#user").click(function () {
+                $(this).val($(this).prop("placeholder"));
             })
+                .keydown(function (e) {
+                    if (e.key === "Tab" && $(this).val().trim() === "") {
+                        $(this).val($(this).prop("placeholder"));
+                    }
+                })
 
-            document.getElementById("user").addEventListener("keydown", function (e) {
-                if (e.key === "Tab") {
-                    document.getElementById("user").value = document.getElementById("user").placeholder;
+
+            $("#email").keyup(function () {
+                if ($("#user").val().trim() === "") {
+                    let email = $(this).val().split("@");
+                    $("#user").prop("placeholder", email[0]);
                 }
-            })
-
-            document.getElementById("email").addEventListener("keyup", function () {
-                if (document.getElementById("user").value.trim() === "") {
-                    let email = document.getElementById("email").value.split("@");
-                    document.getElementById("user").placeholder = email[0];
-                }
-
             })
 
             function emailVerify() {
@@ -198,14 +194,17 @@
                 }
             }
 
-            userElement.on("blur", function () {
+            $("#user").on("blur", function () {
                 check($(this));
             })
 
-            passwordElement.on("blur", function () {
+            $("#password").on("blur", function () {
                 check($(this));
             })
+
             $("#register").on("click", function () {
+                let email = $("#email").val();
+                let password = $("#password").val();
                 let verifyCode = $("#verify-code").val();
                 $.ajax({
                     method: "GET",
@@ -213,17 +212,27 @@
                     data: {verifyCode: verifyCode},
                     dataType: "json"
                 })
-                    .done(function (data){
-                        if(data.message === "验证码错误"){
+                    .done(function (data) {
+                        if (data.message === "验证码错误") {
                             alert(data.message);
-                        }else{
-                            if (check(userElement) && check(passwordElement)) {
-                                $("form").submit();
+                        } else {
+                            if (check($("#user")) && check($("#password"))) {
+                                $.ajax({
+                                    method: "POST",
+                                    url: "../RegisterServlet",
+                                    data: {email: email, password: password},
+                                })
+                                    .done(function (data) {
+                                        if (data.message !== "该用户已存在") {
+                                            $("form").submit();
+                                        } else {
+                                            window.location.reload();
+                                        }
+                                    })
                             } else {
                                 if (!$("#register").hasClass("is-invalid")) {
                                     $("#register").toggleClass("is-invalid");
                                 }
-                                $("#register").prop("type", "button");
                             }
                         }
                     })
