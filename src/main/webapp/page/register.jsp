@@ -227,6 +227,7 @@
                                         if (data.message !== "该用户已存在") {
                                             $("form").submit();
                                         } else {
+                                            console.log(data.message + ":fail")
                                             alert("注册失败！");
                                         }
                                     })

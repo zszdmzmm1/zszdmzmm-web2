@@ -17,7 +17,7 @@ import java.sql.Connection;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
 
 
     @Override
