@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet("/admin/user")
 public class AdminServlet extends HttpServlet {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

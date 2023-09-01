@@ -13,8 +13,8 @@ import java.sql.Connection;
 
 @WebServlet("/register-verify")
 public class RegisterServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = new JDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
+    Connection connection = JDBCConnection.getConnection();
 
 
     @Override

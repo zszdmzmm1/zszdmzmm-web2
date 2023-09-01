@@ -19,7 +19,7 @@ import java.util.Date;
 @WebFilter("/user/*")
 public class IsUserFilter extends HttpFilter {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {

@@ -13,7 +13,7 @@ import java.sql.Connection;
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int realId = Integer.parseInt(req.getParameter("id").substring(1));

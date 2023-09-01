@@ -14,8 +14,8 @@ import java.util.List;
 
 @WebServlet("/login-verify")
 public class LoginServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = new JDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
+    Connection connection = JDBCConnection.getConnection();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

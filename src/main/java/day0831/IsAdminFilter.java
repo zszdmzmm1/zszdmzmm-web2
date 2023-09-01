@@ -20,8 +20,8 @@ import java.util.Date;
 
 @WebFilter("/admin/user")
 public class IsAdminFilter extends HttpFilter {
-    JDBCConnection jdbcConnection = new JDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
+    Connection connection = JDBCConnection.getConnection();
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = req.getSession();

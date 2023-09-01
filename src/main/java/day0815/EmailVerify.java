@@ -13,8 +13,8 @@ import java.sql.Connection;
 
 @WebServlet("/emailVerify")
 public class EmailVerify extends HttpServlet {
-    JDBCConnection jdbcConnection = new JDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
+    Connection connection = JDBCConnection.getConnection();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email").trim();

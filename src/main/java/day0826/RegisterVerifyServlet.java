@@ -16,7 +16,7 @@ import java.sql.Connection;
 @WebServlet("/RegisterVerifyServlet")
 public class RegisterVerifyServlet extends HttpServlet {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

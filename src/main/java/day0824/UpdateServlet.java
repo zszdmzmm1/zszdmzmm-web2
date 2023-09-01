@@ -15,7 +15,7 @@ import java.sql.Connection;
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = jdbcConnection.getConnection();
+    Connection connection = JDBCConnection.getConnection();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id").substring(1));

@@ -30,7 +30,10 @@ public class JDBCConnection {
         return ConnectionHolder.CONNECTION;
     }
 
-    public Connection getInitConnection() {
+    private JDBCConnection() {
+    }
+
+    private Connection getInitConnection() {
         Connection conn;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
