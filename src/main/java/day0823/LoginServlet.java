@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/homepage")
 public class LoginServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = new JDBCConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = jdbcConnection.getConnection();
 
     @Override

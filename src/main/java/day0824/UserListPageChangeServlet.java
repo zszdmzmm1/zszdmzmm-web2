@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/page-change")
 public class UserListPageChangeServlet extends HttpServlet {
-    JDBCConnection  jdbcConnection = new JDBCConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = jdbcConnection.getConnection();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

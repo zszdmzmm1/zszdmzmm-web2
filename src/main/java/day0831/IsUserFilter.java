@@ -18,7 +18,7 @@ import java.util.Date;
 
 @WebFilter("/user/*")
 public class IsUserFilter extends HttpFilter {
-    JDBCConnection jdbcConnection = new JDBCConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = jdbcConnection.getConnection();
 
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet("/admin/user")
 public class AdminServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = new JDBCConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = jdbcConnection.getConnection();
 
     @Override

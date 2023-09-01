@@ -13,7 +13,24 @@ import java.util.List;
     );
  */
 public class JDBCConnection {
-    public Connection getConnection() {
+    private static final class JDBCConnectionHolder {
+        private static final JDBCConnection JDBC_CONNECTION = new JDBCConnection();
+    }
+
+    public static JDBCConnection getJDBCConnection() {
+        return JDBCConnectionHolder.JDBC_CONNECTION;
+    }
+
+    public static final class ConnectionHolder {
+        private static final Connection CONNECTION = JDBCConnection
+                .getJDBCConnection().getInitConnection();
+    }
+
+    public static Connection getConnection() {
+        return ConnectionHolder.CONNECTION;
+    }
+
+    public Connection getInitConnection() {
         Connection conn;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,7 +38,6 @@ public class JDBCConnection {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Connected to database");
         return conn;
     }
 
@@ -61,7 +77,7 @@ public class JDBCConnection {
         return null;
     }
 
-    public List<User> getAllUser(Connection connection){
+    public List<User> getAllUser(Connection connection) {
         String query = "select id, email, password, role from user";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = connection.prepareStatement(query)) {
@@ -86,7 +102,7 @@ public class JDBCConnection {
         return count;
     }
 
-    public List<User> getAPageUser(Connection connection, int page){
+    public List<User> getAPageUser(Connection connection, int page) {
         int beginIndex = (page - 1) * 10;
         String query = "select id, email, password, role from user limit ?, 10";
         List<User> userList = new ArrayList<>();
@@ -121,7 +137,7 @@ public class JDBCConnection {
         }
     }
 
-    public void addUserLog(Connection connection, UserLog userLog){
+    public void addUserLog(Connection connection, UserLog userLog) {
         String insertSql = "insert into `user-log`(`user-id`, time, behavior) values(?, ?, ?);";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setInt(1, userLog.getUserId());
@@ -133,7 +149,7 @@ public class JDBCConnection {
         }
     }
 
-    public void delete(Connection connection, int id){
+    public void delete(Connection connection, int id) {
         String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setInt(1, id);
@@ -143,7 +159,7 @@ public class JDBCConnection {
         }
     }
 
-    public void update(Connection connection, int id, String email, String password){
+    public void update(Connection connection, int id, String email, String password) {
         String insertSql = "update user set email = ? , password = ? where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setString(1, email);

@@ -19,7 +19,7 @@ import java.util.Date;
 
 @WebFilter("/logout")
 public class LogoutFilter extends HttpFilter {
-    JDBCConnection jdbcConnection = new JDBCConnection();
+    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = jdbcConnection.getConnection();
 
     @Override

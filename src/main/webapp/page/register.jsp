@@ -221,12 +221,13 @@
                                     method: "POST",
                                     url: "../RegisterServlet",
                                     data: {email: email, password: password},
+                                    dataType: "json"
                                 })
                                     .done(function (data) {
                                         if (data.message !== "该用户已存在") {
                                             $("form").submit();
                                         } else {
-                                            window.location.reload();
+                                            alert("注册失败！");
                                         }
                                     })
                             } else {
