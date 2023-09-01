@@ -40,6 +40,16 @@ public class LoginProcessing extends HttpServlet {
                     resp.addCookie(cookie);
                     resp.addCookie(cookie1);
                     resp.addCookie(cookie2);
+                }else{
+                    Cookie cookie = new Cookie("email", null);
+                    Cookie cookie1 = new Cookie("password", null);
+                    Cookie cookie2 = new Cookie("isChecked", null);
+                    cookie.setMaxAge(0);
+                    cookie1.setMaxAge(0);
+                    cookie2.setMaxAge(0);
+                    resp.addCookie(cookie);
+                    resp.addCookie(cookie1);
+                    resp.addCookie(cookie2);
                 }
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
