@@ -1,6 +1,5 @@
 package day0901;
 
-import day0814.HelloServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,8 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/ListenerTestServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/MyHttpSessionAttributeServlet")
+public class MyHttpSessionAttributeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -19,6 +18,7 @@ public class TestServlet extends HttpServlet {
         session.setAttribute("number", 1);
         session.removeAttribute("name");
         session.setAttribute("number", 2);
+        session.setMaxInactiveInterval(30);
     }
 
     @Override

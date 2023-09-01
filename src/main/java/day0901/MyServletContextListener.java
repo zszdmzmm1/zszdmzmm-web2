@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebListener;
 public class MyServletContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        System.out.println(sce.getServletContext().getInitParameter("book"));
         System.out.println("MyListener.contextInitialized");
     }
 
