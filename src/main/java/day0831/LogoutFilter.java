@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebFilter("/logout")
+//@WebFilter("/logout")
 public class LogoutFilter extends HttpFilter {
     JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
     Connection connection = JDBCConnection.getConnection();
