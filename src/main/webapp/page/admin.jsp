@@ -21,7 +21,7 @@
 <body class="sidebar-mini" style="height: auto;">
     <div class="wrapper">
 
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light px-2">
 
 
             <ul class="navbar-nav">
@@ -30,6 +30,11 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <span href="login" class="nav-link" id="logout">退出登录</span>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span class="nav-item text-body-secondary">登陆人数:${totalNumberOfLoginUser}</span>
                 </li>
             </ul>
         </nav>
@@ -215,9 +220,7 @@
             </section>
 
         </div>
-        <footer class="main-footer">
-            <strong>Design by <a href="https://adminlte.io">zszdmzmm</a>.</strong>
-        </footer>
+        <%@ include file="./partials/footer.jsp" %>
     </div>
 
 

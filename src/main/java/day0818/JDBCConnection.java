@@ -21,7 +21,7 @@ public class JDBCConnection {
         return JDBCConnectionHolder.JDBC_CONNECTION;
     }
 
-    public static final class ConnectionHolder {
+    private static final class ConnectionHolder {
         private static final Connection CONNECTION = JDBCConnection
                 .getJDBCConnection().getInitConnection();
     }

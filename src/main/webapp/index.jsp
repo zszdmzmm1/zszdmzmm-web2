@@ -1,5 +1,14 @@
-<!doctype html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 86173
+  Date: 2023/9/3
+  Time: 16:28
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -114,12 +123,7 @@
                      class="col-12 col-md-6 border rounded-4 shadow">
             </div>
         </main>
-        <footer class="mt-5 border-top text-center p-3">
-            <p class="d-inline text-body-secondary">Designed by</p>
-            <p class="d-inline fw-bold">@zszdmzmm</p>
-            <p class="d-inline text-body-secondary">-From X to Z</p>
-            <p class="d-inline ms-5 text-body-secondary">在线人数:5人</p>
-        </footer>
+        <%@ include file="./page/partials/footer.jsp" %>
     </div>
     <script src="./build/assets/app.js"></script>
     <script>
