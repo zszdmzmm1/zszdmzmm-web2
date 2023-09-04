@@ -1,23 +1,21 @@
 package day0826;
 
-import day0818.JDBCConnection;
 import day0818.User;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 
 @WebServlet("/admin/user")
 public class AdminServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +26,12 @@ public class AdminServlet extends HttpServlet {
         } else {
             page = Integer.parseInt(sPage);
         }
-        List<User> userList = jdbcConnection.getAPageUser(connection, page);
-        int count = jdbcConnection.getUserCount(connection);
+        List<User> userList = druidDemo.getAPageUser(page);
+        int count = druidDemo.getUserCount();
         int pageCount;
-        if(count % 10 == 0){
+        if (count % 10 == 0) {
             pageCount = count / 10;
-        }else{
+        } else {
             pageCount = count / 10 + 1;
         }
         req.setAttribute("count", count);

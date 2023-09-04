@@ -1,6 +1,6 @@
 package day0824;
 
-import day0818.JDBCConnection;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,16 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int realId = Integer.parseInt(req.getParameter("id").substring(1));
-        jdbcConnection.delete(connection, realId);
+        druidDemo.delete(realId);
     }
 
     @Override

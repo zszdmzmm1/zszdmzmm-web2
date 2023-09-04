@@ -1,8 +1,8 @@
 package day0831;
 
-import day0818.JDBCConnection;
 import day0818.User;
 import day0818.UserLog;
+import day0904.DruidDemo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -13,15 +13,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @WebFilter("/admin/user")
 public class IsAdminFilter extends HttpFilter {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = req.getSession();
@@ -37,6 +35,6 @@ public class IsAdminFilter extends HttpFilter {
         String sDate = simpleDateFormat.format(date);
         int userId = Integer.parseInt(user.getId().substring(1));
         UserLog userLog = new UserLog(userId, sDate, "管理员登录");
-        jdbcConnection.addUserLog(connection, userLog);
+        druidDemo.addUserLog(userLog);
     }
 }

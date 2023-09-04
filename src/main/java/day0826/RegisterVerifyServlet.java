@@ -1,8 +1,8 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import day0818.JDBCConnection;
 import day0818.User;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,17 +11,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 @WebServlet("/RegisterVerifyServlet")
 public class RegisterVerifyServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email").trim();
-        User user = jdbcConnection.getUserByEmail(connection, email);
+        User user = druidDemo.getUserByEmail(email);
         JSONObject jsonObject = new JSONObject();
         if (user != null) {
             jsonObject.put("message", "邮箱已被占用");

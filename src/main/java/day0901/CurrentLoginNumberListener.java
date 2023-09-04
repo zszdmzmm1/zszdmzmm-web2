@@ -1,21 +1,19 @@
 package day0901;
 
-import day0818.JDBCConnection;
 import day0818.User;
 import day0818.UserLog;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionBindingEvent;
 
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebListener
 public class CurrentLoginNumberListener implements HttpSessionAttributeListener {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     public void attributeAdded(HttpSessionBindingEvent event) {
         String name = event.getName();
@@ -36,7 +34,7 @@ public class CurrentLoginNumberListener implements HttpSessionAttributeListener 
             String sDate = simpleDateFormat.format(date);
             int userId = Integer.parseInt(user.getId().substring(1));
             UserLog userLog = new UserLog(userId, sDate, user.getRole() + "登出");
-            jdbcConnection.addUserLog(connection, userLog);
+            druidDemo.addUserLog(userLog);
             ServletContext servletContext = event.getSession().getServletContext();
             int currentLoginNumber = (int) servletContext.getAttribute("totalNumberOfLoginUser");
             servletContext.setAttribute("totalNumberOfLoginUser", currentLoginNumber - 1);

@@ -1,23 +1,21 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import day0818.JDBCConnection;
 import day0818.User;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 
 @WebServlet("/login-processing")
 public class LoginProcessing extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+   DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = jdbcConnection.getUserByEmail(connection, req.getParameter("email"));
+        User user = druidDemo.getUserByEmail(req.getParameter("email"));
         JSONObject jsonObject = new JSONObject();
         if(user == null){
             jsonObject.put("message", "未找到该用户！");

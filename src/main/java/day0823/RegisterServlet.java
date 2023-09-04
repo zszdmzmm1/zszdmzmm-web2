@@ -3,6 +3,7 @@ package day0823;
 import com.alibaba.fastjson.JSONObject;
 import day0818.JDBCConnection;
 import day0818.User;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,8 +17,7 @@ import java.sql.Connection;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
 
 
     @Override
@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = jdbcConnection.getUserByEmail(connection, req.getParameter("email"));
+        User user = druidDemo.getUserByEmail(req.getParameter("email"));
         HttpSession session = req.getSession();
         if (user != null) {
             JSONObject jsonObject = new JSONObject();
@@ -37,8 +37,8 @@ public class RegisterServlet extends HttpServlet {
             out.println(jsonObject);
         } else {
             user = new User(req.getParameter("email"), req.getParameter("password"), "用户");
-            jdbcConnection.add(connection, user);
-            user = jdbcConnection.getUserByEmail(connection, req.getParameter("email"));
+            druidDemo.add(user);
+            user = druidDemo.getUserByEmail(req.getParameter("email"));
             session.setAttribute("user", user);
         }
     }

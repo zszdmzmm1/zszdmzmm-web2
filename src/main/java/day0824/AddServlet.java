@@ -1,7 +1,7 @@
 package day0824;
 
-import day0818.JDBCConnection;
 import day0818.User;
+import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,12 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
-    JDBCConnection jdbcConnection = JDBCConnection.getJDBCConnection();
-    Connection connection = JDBCConnection.getConnection();
+    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -24,7 +22,7 @@ public class AddServlet extends HttpServlet {
             return;
         }
         User user = new User(email, password, "");
-        jdbcConnection.add(connection, user);
+        druidDemo.add(user);
     }
 
     @Override
