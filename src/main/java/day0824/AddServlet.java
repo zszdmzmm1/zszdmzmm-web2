@@ -1,7 +1,8 @@
 package day0824;
 
-import day0818.User;
+import day0904.mybatis.po.User;
 import day0904.DruidDemo;
+import day0904.MybatisMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +13,6 @@ import java.io.IOException;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -22,7 +22,7 @@ public class AddServlet extends HttpServlet {
             return;
         }
         User user = new User(email, password, "");
-        druidDemo.add(user);
+        MybatisMapper.mapper.addUser(user);
     }
 
     @Override

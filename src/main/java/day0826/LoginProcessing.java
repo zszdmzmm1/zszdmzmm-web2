@@ -1,7 +1,8 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import day0818.User;
+import day0904.MybatisMapper;
+import day0904.mybatis.po.User;
 import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,10 +13,9 @@ import java.io.PrintWriter;
 
 @WebServlet("/login-processing")
 public class LoginProcessing extends HttpServlet {
-   DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = druidDemo.getUserByEmail(req.getParameter("email"));
+        User user = MybatisMapper.mapper.getUserByEmail(req.getParameter("email"));
         JSONObject jsonObject = new JSONObject();
         if(user == null){
             jsonObject.put("message", "未找到该用户！");

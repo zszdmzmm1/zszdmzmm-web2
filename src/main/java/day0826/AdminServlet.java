@@ -1,7 +1,7 @@
 package day0826;
 
-import day0818.User;
-import day0904.DruidDemo;
+import day0904.MybatisMapper;
+import day0904.mybatis.po.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,6 @@ import java.util.List;
 
 @WebServlet("/admin/user")
 public class AdminServlet extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
 
 
     @Override
@@ -26,8 +25,8 @@ public class AdminServlet extends HttpServlet {
         } else {
             page = Integer.parseInt(sPage);
         }
-        List<User> userList = druidDemo.getAPageUser(page);
-        int count = druidDemo.getUserCount();
+        List<User> userList = MybatisMapper.mapper.getAPageUser((page - 1) * 10);
+        int count = MybatisMapper.mapper.getUserCount();
         int pageCount;
         if (count % 10 == 0) {
             pageCount = count / 10;

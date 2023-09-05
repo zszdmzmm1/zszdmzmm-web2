@@ -125,7 +125,7 @@ public class DruidDemo {
         }
     }
 
-    public void add(User user) {
+    public void addUser(User user) {
         String insertSql = "insert into user(email, password) values(?, ?);";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
             ppstmt.setString(1, user.getEmail());
@@ -148,7 +148,7 @@ public class DruidDemo {
         }
     }
 
-    public void delete(int id) {
+    public void deleteUser(int id) {
         String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
             ppstmt.setInt(1, id);
@@ -158,7 +158,7 @@ public class DruidDemo {
         }
     }
 
-    public void update(int id, String email, String password) {
+    public void updateUser(int id, String email, String password) {
         String insertSql = "update user set email = ? , password = ? where id = ?;";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
             ppstmt.setString(1, email);

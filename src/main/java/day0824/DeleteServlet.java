@@ -1,6 +1,7 @@
 package day0824;
 
 import day0904.DruidDemo;
+import day0904.MybatisMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,11 +12,10 @@ import java.io.IOException;
 
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int realId = Integer.parseInt(req.getParameter("id").substring(1));
-        druidDemo.delete(realId);
+        MybatisMapper.mapper.deleteUser(realId);
     }
 
     @Override

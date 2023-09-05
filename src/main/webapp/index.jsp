@@ -24,7 +24,7 @@
             <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5 shadow">
                 <div class="container-fluid">
                     <div class="navbar-brand">
-                        <img src="./image/QQ图片20230720103937.jpg" alt="头像" height="40" >
+                        <img src="image/QQ图片20230720103937.jpg" alt="头像" height="40" >
                         <a href="#" class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
                     </div>
 
@@ -37,16 +37,16 @@
                         <div class="navbar-nav ms-auto">
                             <div class="d-flex">
                                 <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
-                                   href="./page/test-navigator.html">测试导航页</a>
+                                   href="page/test-navigator.html">测试导航页</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-box py-2 nav-item me-1"></i>
                                 <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
-                                   href="./resume/resume2.html">简历</a>
+                                   href="resume/resume2.html">简历</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-journal-text py-2 nav-item me-1"></i>
-                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="./page/article.html">博客</a>
+                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="page/article.html">博客</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-github py-2 nav-item me-1"></i>
@@ -95,7 +95,7 @@
                     <h1 class="text-md-start text-center">简历</h1>
                     <p class="text-body-secondary text-md-start text-center">用简短的一句话介绍简历</p>
                 </div>
-                <img src="./image/Snipaste_2023-07-25_10-54-27.png" alt="简历"
+                <img src="image/Snipaste_2023-07-25_10-54-27.png" alt="简历"
                      class="col-12 col-md-6 border rounded-4 shadow">
             </div>
             <div class="row mb-5 d-md-flex flex-row-reverse">
@@ -103,7 +103,7 @@
                     <h1 class="text-md-end text-center">博客</h1>
                     <p class="text-body-secondary text-md-end text-center">用简短的一句话介绍博客</p>
                 </div>
-                <img src="./image/Snipaste_2023-07-25_10-54-27.png" alt="博客"
+                <img src="image/Snipaste_2023-07-25_10-54-27.png" alt="博客"
                      class="col-12 col-md-6 border rounded-4 shadow">
             </div>
             <div class="row mb-5">
@@ -111,7 +111,7 @@
                     <h1 class="text-md-start text-center">模块X</h1>
                     <p class="text-body-secondary text-md-start text-center">用简短的一句话介绍模块X</p>
                 </div>
-                <img src="./image/Snipaste_2023-07-25_10-54-27.png" alt="模块X"
+                <img src="image/Snipaste_2023-07-25_10-54-27.png" alt="模块X"
                      class="col-12 col-md-6 border rounded-4 shadow">
             </div>
             <div class="row mb-5 d-md-flex flex-row-reverse">
@@ -119,13 +119,13 @@
                     <h1 class="text-md-end text-center">模块Y</h1>
                     <p class="text-body-secondary text-md-end text-center">用简短的一句话介绍模块Y</p>
                 </div>
-                <img src="./image/Snipaste_2023-07-25_10-54-27.png" alt="模块Y"
+                <img src="image/Snipaste_2023-07-25_10-54-27.png" alt="模块Y"
                      class="col-12 col-md-6 border rounded-4 shadow">
             </div>
         </main>
-        <%@ include file="./page/partials/footer.jsp" %>
+        <%@ include file="page/partials/footer.jsp" %>
     </div>
-    <script src="./build/assets/app.js"></script>
+    <script src="build/assets/app.js"></script>
     <script>
         function dropDownMenuShow() {
             document.getElementById("dropdown").setAttribute("class", "dropdown-menu show");

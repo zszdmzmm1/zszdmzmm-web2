@@ -1,7 +1,8 @@
 package day0824;
 
-import day0818.User;
-import day0904.DruidDemo;
+
+import day0904.MybatisMapper;
+import day0904.mybatis.po.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,10 +14,8 @@ import java.util.List;
 
 @WebServlet("/page-change")
 public class UserListPageChangeServlet extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(1111);
         int page = Integer.parseInt(req.getParameter("page"));
         String target = req.getParameter("target");
         if(target.equals("Previous")){
@@ -24,7 +23,7 @@ public class UserListPageChangeServlet extends HttpServlet {
         }else{
             page += 1;
         }
-        List<User> userList = druidDemo.getAPageUser(page);
+        List<User> userList = MybatisMapper.mapper.getAPageUser((page - 1) * 10);
         req.setAttribute("userList", userList);
         req.setAttribute("page", page);
         req.getRequestDispatcher("./page/admin.jsp").forward(req, resp);

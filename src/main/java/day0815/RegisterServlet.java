@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
             req.setAttribute("user", "该用户已存在！");
         }else {
             user = new User(req.getParameter("email"), req.getParameter("password"), "用户");
-            druidDemo.add(user);
+            druidDemo.addUser(user);
             req.setAttribute("user", user);
         }
         req.getRequestDispatcher("./welcome-page").forward(req, resp);

@@ -1,8 +1,9 @@
 package day0831;
 
-import day0818.User;
-import day0818.UserLog;
-import day0904.DruidDemo;
+import day0904.MybatisMapper;
+import day0904.mybatis.po.User;
+import day0904.mybatis.po.UserLog;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -19,7 +20,6 @@ import java.util.Date;
 
 @WebFilter("/admin/user")
 public class IsAdminFilter extends HttpFilter {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = req.getSession();
@@ -35,6 +35,6 @@ public class IsAdminFilter extends HttpFilter {
         String sDate = simpleDateFormat.format(date);
         int userId = Integer.parseInt(user.getId().substring(1));
         UserLog userLog = new UserLog(userId, sDate, "管理员登录");
-        druidDemo.addUserLog(userLog);
+        MybatisMapper.mapper.addUserLog(userLog);
     }
 }

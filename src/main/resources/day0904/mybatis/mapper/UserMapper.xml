@@ -19,24 +19,26 @@
     </select>
 
     <select id="getAPageUser" resultType="User">
-        select concat('u',id), email, password, role from user limit ?, 10
+        select concat('u', id), email, password, role
+        from user
+        limit #{page}, 10
     </select>
 
     <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
-        insert into user (email, password)
-        values (#{email},#{password})
+        insert into user (email, password, role)
+        values (#{email}, #{password}, '用户')
     </insert>
 
     <insert id="addUserLog" useGeneratedKeys="true" keyProperty="id">
         insert into `user-log`(`user-id`, time, behavior)
-        values(#{UserId}, #{time}, #{behaviour})
+        values(#{userId}, #{time}, #{behavior})
     </insert>
 
     <update id="updateUser">
         update user set
-        email = #{email},
-        password = #{password}
-        where id = #{id}
+        email = #{arg1},
+        password = #{arg2}
+        where id = #{arg0}
     </update>
 
     <delete id="deleteUser">

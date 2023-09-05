@@ -1,7 +1,8 @@
 package day0831;
 
-import day0818.User;
-import day0818.UserLog;
+import day0904.MybatisMapper;
+import day0904.mybatis.po.User;
+import day0904.mybatis.po.UserLog;
 import day0904.DruidDemo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -16,7 +17,6 @@ import java.util.Date;
 
 //@WebFilter("/logout")
 public class LogoutFilter extends HttpFilter {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -28,6 +28,6 @@ public class LogoutFilter extends HttpFilter {
         String sDate = simpleDateFormat.format(date);
         int userId = Integer.parseInt(user.getId().substring(1));
         UserLog userLog = new UserLog(userId, sDate, "登出");
-        druidDemo.addUserLog(userLog);
+        MybatisMapper.mapper.addUserLog(userLog);
     }
 }

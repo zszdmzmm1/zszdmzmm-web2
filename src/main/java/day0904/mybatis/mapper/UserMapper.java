@@ -1,7 +1,7 @@
 package day0904.mybatis.mapper;
 
 
-import day0818.UserLog;
+import day0904.mybatis.po.UserLog;
 import day0904.mybatis.po.User;
 
 import java.util.List;
@@ -24,5 +24,6 @@ public interface UserMapper {
 
     void deleteUser(int id);
 
-    void update(int id, String email, String password);
+    void updateUser(int id, String email, String password);
+
 }

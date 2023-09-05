@@ -15,6 +15,7 @@ public class OnlineVisitorListener implements HttpSessionListener {
         servletContext.setAttribute("totalNumberOfOnlineVisitor", currentVisitorCount + 1);
     }
 
+
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         ServletContext servletContext = se.getSession().getServletContext();
