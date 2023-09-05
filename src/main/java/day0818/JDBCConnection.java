@@ -129,7 +129,7 @@ public class JDBCConnection {
         }
     }
 
-    public void add(Connection connection, User user) {
+    public void addUser(Connection connection, User user) {
         String insertSql = "insert into user(email, password) values(?, ?);";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setString(1, user.getEmail());
@@ -152,7 +152,7 @@ public class JDBCConnection {
         }
     }
 
-    public void delete(Connection connection, int id) {
+    public void deleteUser(Connection connection, int id) {
         String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = connection.prepareStatement(insertSql)) {
             ppstmt.setInt(1, id);

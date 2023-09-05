@@ -105,6 +105,7 @@ public class DruidDemo {
         String query = "select id, email, password, role from user limit ?, 10";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
+            System.out.println(dataSource);
             ppstmt.setInt(1, beginIndex);
             readGetUserResult(userList, ppstmt);
         } catch (SQLException e) {

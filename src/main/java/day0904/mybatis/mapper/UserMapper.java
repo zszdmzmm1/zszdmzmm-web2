@@ -1,15 +1,28 @@
 package day0904.mybatis.mapper;
 
 
+import day0818.UserLog;
 import day0904.mybatis.po.User;
+
+import java.util.List;
 
 public interface UserMapper {
 
-    User selectUser(int id);
+    User getUserById(int id);
 
-    int insertUser(User user);
+    User getUserByEmail(String email);
 
-    int updateUrl(User user);
+    List<User> getAllUser();
 
-    int delete(int id);
+    int getUserCount();
+
+    List<User> getAPageUser(int page);
+
+    void addUser(User user);
+
+    void addUserLog(UserLog userLog);
+
+    void deleteUser(int id);
+
+    void update(int id, String email, String password);
 }
