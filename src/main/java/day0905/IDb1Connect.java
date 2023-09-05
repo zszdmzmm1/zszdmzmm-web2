@@ -1,14 +1,11 @@
-package day0904.mybatis.mapper;
+package day0905;
 
-
-import day0904.mybatis.po.UserLog;
 import day0904.mybatis.po.User;
-import day0905.IDb1Connect;
+import day0904.mybatis.po.UserLog;
 
 import java.util.List;
 
-public interface UserMapper extends IDb1Connect {
-
+public interface IDb1Connect {
     User getUserById(int id);
 
     User getUserByEmail(String email);
@@ -26,5 +23,4 @@ public interface UserMapper extends IDb1Connect {
     void deleteUser(int id);
 
     void updateUser(int id, String email, String password);
-
 }
