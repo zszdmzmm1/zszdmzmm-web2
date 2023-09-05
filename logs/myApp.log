@@ -1,1 +1,2 @@
 17:19:54.297 [main] INFO  day0905.HelloLog - Hello World User{id='null', email='', password='', role=''}
+17:21:45 [main] INFO  day0905.HelloLog - Hello World User{id='null', email='', password='', role=''}
