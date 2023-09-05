@@ -4,6 +4,7 @@ import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
 
+import day0905.IDb1Connect;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -22,6 +23,7 @@ import java.util.Date;
 public class IsAdminFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
         HttpSession session = req.getSession();
         User user =(User)session.getAttribute("user");
         if(user == null || !"管理员".equals(user.getRole())){
@@ -35,6 +37,6 @@ public class IsAdminFilter extends HttpFilter {
         String sDate = simpleDateFormat.format(date);
         int userId = Integer.parseInt(user.getId().substring(1));
         UserLog userLog = new UserLog(userId, sDate, "管理员登录");
-        MybatisMapper.mapper.addUserLog(userLog);
+        connector.addUserLog(userLog);
     }
 }

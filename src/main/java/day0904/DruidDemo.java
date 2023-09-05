@@ -1,8 +1,9 @@
 package day0904;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import day0818.User;
-import day0818.UserLog;
+import day0904.mybatis.po.User;
+import day0904.mybatis.po.UserLog;
+import day0905.IDb1Connect;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DruidDemo {
+public class DruidDemo implements IDb1Connect {
 
     private static DataSource dataSource;
 

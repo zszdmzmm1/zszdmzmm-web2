@@ -1,6 +1,6 @@
 package day0815;
 
-import day0818.User;
+import day0904.mybatis.po.User;
 import day0904.DruidDemo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

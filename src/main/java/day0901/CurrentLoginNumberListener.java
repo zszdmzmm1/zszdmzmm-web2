@@ -4,6 +4,7 @@ import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
 import day0904.DruidDemo;
+import day0905.IDb1Connect;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
@@ -26,6 +27,7 @@ public class CurrentLoginNumberListener implements HttpSessionAttributeListener 
 
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
+        IDb1Connect connector = (IDb1Connect) event.getSession().getServletContext().getAttribute("connector");
         String name = event.getName();
         if("user".equals(name)){
             Date date = new Date();
@@ -34,7 +36,7 @@ public class CurrentLoginNumberListener implements HttpSessionAttributeListener 
             String sDate = simpleDateFormat.format(date);
             int userId = Integer.parseInt(user.getId().substring(1));
             UserLog userLog = new UserLog(userId, sDate, user.getRole() + "登出");
-            MybatisMapper.mapper.addUserLog(userLog);
+            connector.addUserLog(userLog);
             ServletContext servletContext = event.getSession().getServletContext();
             int currentLoginNumber = (int) servletContext.getAttribute("totalNumberOfLoginUser");
             servletContext.setAttribute("totalNumberOfLoginUser", currentLoginNumber - 1);

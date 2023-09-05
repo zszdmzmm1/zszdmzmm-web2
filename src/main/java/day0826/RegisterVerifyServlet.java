@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.DruidDemo;
+import day0905.IDb1Connect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,8 +19,9 @@ public class RegisterVerifyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
         String email = req.getParameter("email").trim();
-        User user = MybatisMapper.mapper.getUserByEmail(email);
+        User user = connector.getUserByEmail(email);
         JSONObject jsonObject = new JSONObject();
         if (user != null) {
             jsonObject.put("message", "邮箱已被占用");

@@ -3,6 +3,7 @@ package day0824;
 import day0904.mybatis.po.User;
 import day0904.DruidDemo;
 import day0904.MybatisMapper;
+import day0905.IDb1Connect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import java.io.IOException;
 public class AddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         if("".equals(email) || "".equals(password)){
@@ -22,7 +24,7 @@ public class AddServlet extends HttpServlet {
             return;
         }
         User user = new User(email, password, "");
-        MybatisMapper.mapper.addUser(user);
+        connector.addUser(user);
     }
 
     @Override

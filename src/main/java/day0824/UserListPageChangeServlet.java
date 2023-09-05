@@ -3,6 +3,7 @@ package day0824;
 
 import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
+import day0905.IDb1Connect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserListPageChangeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
         int page = Integer.parseInt(req.getParameter("page"));
         String target = req.getParameter("target");
         if(target.equals("Previous")){
@@ -23,7 +25,7 @@ public class UserListPageChangeServlet extends HttpServlet {
         }else{
             page += 1;
         }
-        List<User> userList = MybatisMapper.mapper.getAPageUser((page - 1) * 10);
+        List<User> userList = connector.getAPageUser((page - 1) * 10);
         req.setAttribute("userList", userList);
         req.setAttribute("page", page);
         req.getRequestDispatcher("./page/admin.jsp").forward(req, resp);

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.DruidDemo;
+import day0905.IDb1Connect;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -15,7 +16,8 @@ import java.io.PrintWriter;
 public class LoginProcessing extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = MybatisMapper.mapper.getUserByEmail(req.getParameter("email"));
+        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
+        User user = connector.getUserByEmail(req.getParameter("email"));
         JSONObject jsonObject = new JSONObject();
         if(user == null){
             jsonObject.put("message", "未找到该用户！");
