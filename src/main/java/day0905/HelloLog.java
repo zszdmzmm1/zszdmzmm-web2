@@ -1,12 +1,10 @@
 package day0905;
 
 import day0904.mybatis.po.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class HelloLog {
-    private static Logger logger = LoggerFactory.getLogger(HelloLog.class);
     public static void main(String[] args) {
-        logger.info("Hello World {}", new User("", "", ""));
+        log.info("Hello World {}", new User("", "", ""));
     }
 }
