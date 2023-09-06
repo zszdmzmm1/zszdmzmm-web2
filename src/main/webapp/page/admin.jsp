@@ -111,114 +111,132 @@
         </aside>
 
         <div class="content-wrapper" style="min-height: 1604.44px;">
-
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>用户列表</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <c:if test="${page != 1}">
-                                            <li class="page-item">
-                                                <a class="page-link" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                        <li class="page-item"><span class="page-link">${page}</span></li>
-                                        <c:if test="${page != pageCount}">
-                                            <li class="page-item">
-                                                <a class="page-link" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                    </ul>
-                                </nav>
-                            </ol>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">用户列表</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section class="content">
-
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="row border-bottom border-3 py-4">
-                            <div class="col-2">#</div>
-                            <div class="col-5">邮箱</div>
-                            <div class="col-4">密码</div>
-                            <div class="col-1 text-end" id="add-trigger">添加</div>
-                        </div>
-                        <form class="border border-1 rounded-2 p-2 my-3 bg-light update_form" id="add"
-                              style="display: none;">
-                            <div class="mb-3">
-                                <label for="add-email" class="form-label">邮箱</label>
-                                <input type="email" class="form-control" id="add-email" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="add-password" class="form-label">密码</label>
-                                <input type="password" class="form-control" id="add-password">
-                            </div>
-                            <button type="button" class="btn btn-primary" id="add-submit">添加</button>
-                        </form>
-                        <c:forEach items="${userList}" var="user" varStatus="status">
-                            <div class="row border-bottom border-top border-2 py-4" id="${user.getId()}">
-                                <div class="col-2">${status.count + (page - 1) * 10}</div>
-                                <div class="col-5">${user.getEmail()}</div>
-                                <div class="col-4">${user.getPassword()}</div>
-                                <div class="col-1 text-end">
-                                    <span class="me-1 delete">删除</span>
-                                    <span class="update">修改</span>
-                                </div>
-                                <form class="border border-1 rounded-2 p-2 my-3 bg-light update_form"
-                                      id="${user.getId()}-update" style="display: none;">
-                                    <div class="mb-3">
-                                        <label for="update-${user.getId()}" class="form-label">邮箱</label>
-                                        <input type="email" class="form-control" id="update-${user.getId()}"
-                                               placeholder="不填写可保持不变">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">密码</label>
-                                        <input type="text" class="form-control"
-                                               placeholder="不填写可保持不变">
-                                    </div>
-                                    <button type="button" class="btn btn-primary" id="${user.getId()}-submit">更新
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-striped text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>邮箱</th>
+                                <th>密码</th>
+                                <th class="text-end">
+                                    <button class="btn btn-default" type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                                        添加
                                     </button>
-                                </form>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <div class="card-footer">
-                        <span class="text-secondary">当前第${page}页，总计${pageCount}页，共${count}条记录</span>
-                    </div>
+                                    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1"
+                                         id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="staticBackdropLabel">添加用户</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            <form class="border border-1 rounded-2 p-4 my-3 bg-light update_form"
+                                                  id="add">
+                                                <div class="mb-3 text-start">
+                                                    <label for="add-email" class="form-label d-inline">邮箱</label>
+                                                    <input type="email" class="form-control" id="add-email"
+                                                           aria-describedby="emailHelp">
+                                                </div>
+                                                <div class="mb-3 text-start">
+                                                    <label for="add-password" class="form-label">密码</label>
+                                                    <input type="password" class="form-control" id="add-password">
+                                                </div>
+                                                <div class="d-flex justify-content-start">
+                                                    <button type="button" class="btn btn-primary" id="add-submit">添加
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-default">删除</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${userList}" var="user" varStatus="status">
+                                <tr id="${user.getId()}">
+                                    <td>${status.count + (page - 1) * 10}</td>
+                                    <td>${user.getEmail()}</td>
+                                    <td>${user.getPassword()}</td>
+                                    <td class="text-end">
+                                        <button class="btn btn-default" type="button" data-bs-toggle="offcanvas"
+                                                data-bs-target="#staticBackdrop1" aria-controls="staticBackdrop">
+                                            更新
+                                        </button>
+                                        <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1"
+                                             id="staticBackdrop1" aria-labelledby="staticBackdropLabel">
+                                            <div class="offcanvas-header">
+                                                <h5 class="offcanvas-title" id="staticBackdropLabel1">更新用户信息</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="offcanvas-body">
+                                                <form class="border border-1 rounded-2 p-2 my-3 bg-light update_form"
+                                                      id="${user.getId()}">
+                                                    <div class="mb-3">
+                                                        <label for="update-${user.getId()}"
+                                                               class="form-label">邮箱</label>
+                                                        <input type="email" class="form-control"
+                                                               id="update-${user.getId()}"
+                                                               placeholder="不填写可保持不变">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">密码</label>
+                                                        <input type="text" class="form-control"
+                                                               placeholder="不填写可保持不变">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary update"
+                                                            id="${user.getId()}-submit">更新
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <button class="delete btn btn-default">删除</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <c:if test="${page != 1}">
-                            <li class="page-item">
-                                <a class="page-link" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        </c:if>
-                        <li class="page-item"><span class="page-link">${page}</span></li>
-                        <c:if test="${page != pageCount}">
-                            <li class="page-item">
-                                <a class="page-link" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </nav>
-            </section>
-
+                <div class="card-footer">
+                    <span class="text-secondary">当前第${page}页，总计${pageCount}页，共${count}条记录</span>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <c:if test="${page != 1}">
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <li class="page-item"><span class="page-link">${page}</span></li>
+                    <c:if test="${page != pageCount}">
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
         </div>
         <%@ include file="./partials/footer.jsp" %>
     </div>
@@ -264,52 +282,46 @@
         });
 
         $(".update").click(function () {
-            let id = $(this).parent().parent().attr("id");
-            $(`#${"${id}"}-update`).toggle();
-            $(`#${"${id}"}-submit`).click(function () {
-                let email = $(this).prev().prev().find("input").val();
-                let password = $(this).prev().find("input").val();
-                $.ajax({
-                    method: "GET",
-                    url: "update",
-                    data: {id: id, email: email, password: password}
-                })
-                    .done(function () {
-                        window.location.reload();
-                        alert("更新成功！");
-                    })
-                    .fail(function () {
-                        alert("something wrong, please check again");
-                    })
+            let id = $(this).parent().attr("id");
+            let email = $(this).prev().prev().find("input").val();
+            let password = $(this).prev().find("input").val();
+            $.ajax({
+                method: "GET",
+                url: "update",
+                data: {id: id, email: email, password: password}
             })
+                .done(function () {
+                    window.location.reload();
+                    alert("更新成功！");
+                })
+                .fail(function () {
+                    alert("something wrong, please check again");
+                })
         });
 
-        $("#add-trigger").click(function () {
-            $("#add").toggle();
-            $("#add-submit").click(function () {
-                let email = $("#add-email").val();
-                let password = $("#add-password").val();
-                $.ajax({
-                    method: "GET",
-                    url: "add",
-                    data: {email: email, password: password}
-                })
-                    .done(function () {
-                        window.location.reload();
-                        alert("增加成功！");
-                    })
-                    .fail(function () {
-                        alert("账号或密码不能为空！");
-                    })
+        $("#add-submit").click(function () {
+            let email = $("#add-email").val();
+            let password = $("#add-password").val();
+            $.ajax({
+                method: "GET",
+                url: "add",
+                data: {email: email, password: password}
             })
+                .done(function () {
+                    window.location.reload();
+                    alert("增加成功！");
+                })
+                .fail(function () {
+                    alert("账号或密码不能为空！");
+                })
         });
 
-        $("#logout").click(function (){
+        $("#logout").click(function () {
             $.ajax({
                 method: "GET",
                 url: "logout"
             })
-                .done(function (){
+                .done(function () {
                     window.location.reload();
                 })
         })
