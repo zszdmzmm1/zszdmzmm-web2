@@ -3,11 +3,11 @@ package day0904.mybatis.mapper;
 
 import day0904.mybatis.po.UserLog;
 import day0904.mybatis.po.User;
-import day0905.IDb1Connect;
+import day0905.IUserDau;
 
 import java.util.List;
 
-public interface UserMapper extends IDb1Connect {
+public interface UserMapper extends IUserDau {
 
     User getUserById(int id);
 

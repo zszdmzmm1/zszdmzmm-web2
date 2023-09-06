@@ -1,8 +1,6 @@
 package day0824;
 
-import day0904.DruidDemo;
-import day0904.MybatisMapper;
-import day0905.IDb1Connect;
+import day0905.IUserDau;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +13,7 @@ import java.io.IOException;
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
+        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
         int realId = Integer.parseInt(req.getParameter("id").substring(1));
         connector.deleteUser(realId);
     }

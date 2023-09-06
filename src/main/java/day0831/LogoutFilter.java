@@ -1,10 +1,8 @@
 package day0831;
 
-import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
-import day0904.DruidDemo;
-import day0905.IDb1Connect;
+import day0905.IUserDau;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
@@ -21,7 +19,7 @@ public class LogoutFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        IDb1Connect connector = (IDb1Connect) req.getSession().getServletContext().getAttribute("connector");
+        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         chain.doFilter(req, res);

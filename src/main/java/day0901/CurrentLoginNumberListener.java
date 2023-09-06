@@ -1,10 +1,8 @@
 package day0901;
 
-import day0904.MybatisMapper;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
-import day0904.DruidDemo;
-import day0905.IDb1Connect;
+import day0905.IUserDau;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
@@ -27,7 +25,7 @@ public class CurrentLoginNumberListener implements HttpSessionAttributeListener 
 
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
-        IDb1Connect connector = (IDb1Connect) event.getSession().getServletContext().getAttribute("connector");
+        IUserDau connector = (IUserDau) event.getSession().getServletContext().getAttribute("connector");
         String name = event.getName();
         if("user".equals(name)){
             Date date = new Date();
