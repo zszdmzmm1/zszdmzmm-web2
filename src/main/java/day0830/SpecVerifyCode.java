@@ -108,5 +108,4 @@ public class SpecVerifyCode {
         int[] color = COLOR[num(COLOR.length)];
         return new Color(color[0], color[1], color[2]);
     }
-
 }

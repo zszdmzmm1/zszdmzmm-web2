@@ -122,7 +122,7 @@
                             <div class="invalid-tooltip"></div>
                             <a href=""
                                class="text-decoration-none text-body-secondary fs-6 me-4 d-block d-xl-inline mb-1">忘记密码</a>
-                            <a href="page/register.jsp"
+                            <a href="register"
                                class="text-decoration-none text-body-secondary fs-6 d-block d-xl-inline mb-1">注册新账号</a>
                         </div>
                     </div>

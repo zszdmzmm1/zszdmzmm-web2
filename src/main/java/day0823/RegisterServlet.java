@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IUserDau connector = (IUserDau) req.getAttribute("connector");
+        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
         User user = connector.getUserByEmail(req.getParameter("email"));
         HttpSession session = req.getSession();
         JSONObject jsonObject = new JSONObject();

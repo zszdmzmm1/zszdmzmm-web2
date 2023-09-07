@@ -14,8 +14,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="http://localhost:8080/zszdmzmm_web2_war/">
     <title>注册</title>
-    <link rel="stylesheet" href="../build/assets/app.css">
+    <link rel="stylesheet" href="build/assets/app.css">
 </head>
 <body>
     <div class="vh-100 px-2 mb-5 d-flex flex-column justify-content-between">
@@ -24,8 +25,8 @@
             <nav class="navbar navbar-expand-sm bg-body-tertiary mb-5 shadow">
                 <div class="container-fluid">
                     <div class="navbar-brand">
-                        <img src="../image/QQ图片20230720103937.jpg" alt="头像" height="40">
-                        <a href="../index.html"
+                        <img src="image/QQ图片20230720103937.jpg" alt="头像" height="40">
+                        <a href=""
                            class="link-body-emphasis text-body-secondary text-decoration-none">我的主页</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -38,12 +39,12 @@
                             <div class="d-flex">
                                 <i class="bi bi-box py-2 nav-item me-1"></i>
                                 <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
-                                   href="./resume/resume2.html">简历</a>
+                                   href="resume/resume2.html">简历</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-journal-text py-2 nav-item me-1"></i>
                                 <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link"
-                                   href="./page/article.html">博客</a>
+                                   href="page/article.html">博客</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-github py-2 nav-item me-1"></i>
@@ -80,7 +81,7 @@
             </nav>
         </header>
         <main class="container w-50 p-4 mx-auto mb-5">
-            <form action="../user/" method="post" class="card">
+            <form action="user/" method="post" class="card">
                 <div class="card-header">注册</div>
                 <div class="card-body">
                     <div class="row mb-2 w-75 mx-auto mb-4">
@@ -113,8 +114,9 @@
                         <div class="col-lg-9 col-xxl-10 position-relative">
                             <input class="form-control mb-3" type="text" id="verify-code" name="verify-code"
                                    required>
-                            <img src="../setVerifyCodeServlet" alt="验证"
-                                 onclick="this.src='../verifyImgServlet?'+ Math.random()">
+                            <%--<img src="setVerifyCodeServlet" alt="验证"
+                                 onclick="this.src='setVerifyCodeServlet?'+ Math.random()">--%>
+                            <button class="btn btn-danger" id="emailCode">获取验证码</button>
                         </div>
                     </div>
                     <div class="row w-75 mx-auto">
@@ -129,9 +131,9 @@
             </form>
         </main>
 
-        <%@ include file="./partials/footer.jsp" %>
+        <%@ include file="partials/footer.jsp" %>
 
-        <script src="../build/assets/app.js"></script>
+        <script src="build/assets/app.js"></script>
         <script>
 
             function check(value) {
@@ -172,7 +174,7 @@
                 element.className = "text-danger";
                 element.setAttribute("id", "email-check")
                 let xhr = new XMLHttpRequest();
-                xhr.open('POST', '../emailVerify', true);
+                xhr.open('POST', 'emailVerify', true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.send("email=" + document.getElementById("email").value);
                 xhr.onreadystatechange = function () {
@@ -204,7 +206,7 @@
                 let verifyCode = $("#verify-code").val();
                 $.ajax({
                     method: "GET",
-                    url: "../getVerifyCodeServlet",
+                    url: "getVerifyCodeServlet",
                     data: {verifyCode: verifyCode},
                     dataType: "json"
                 })
@@ -215,7 +217,7 @@
                             if (check($("#user")) && check($("#password"))) {
                                 $.ajax({
                                     method: "POST",
-                                    url: "../RegisterServlet",
+                                    url: "RegisterServlet",
                                     data: {email: email, password: password},
                                     dataType: "json"
                                 })
@@ -231,6 +233,24 @@
                                     $("#register").toggleClass("is-invalid");
                                 }
                             }
+                        }
+                    })
+            })
+
+            $("#emailCode").click(function (){
+                $.ajax({
+                    method: "GET",
+                    url: "GetEmailCode",
+                })
+                    .done(function (){
+                        if($("#email").val().trim() !== ""){
+                            alert("已发送验证码");
+                            $("#emailCode").attr( "disabled", true);
+                            setTimeout(function (){
+                                $("#emailCode").attr("disabled", false);
+                            }, 60000)
+                        } else{
+                            alert("请输入邮箱号");
                         }
                     })
             })
