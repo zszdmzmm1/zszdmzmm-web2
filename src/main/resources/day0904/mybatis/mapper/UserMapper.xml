@@ -44,4 +44,17 @@
     <delete id="deleteUser">
         delete from user where id = #{id}
     </delete>
+
+    <select id="getUsersByFussyEmailSearch">
+        select concat('u', id) as id, email, password, role
+        from user
+        where email like '%${arg0}%'
+        limit #{arg1}, 10
+    </select>
+
+    <select id="getUserCountsByFussyEmailSearch">
+        select count(*) as id
+        from user
+        where email like '%${email}%'
+    </select>
 </mapper>

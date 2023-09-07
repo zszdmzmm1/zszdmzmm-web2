@@ -27,4 +27,9 @@ public interface UserMapper extends IUserDau {
 
     void updateUser(int id, String email, String password);
 
+    List<User> getUsersByFussyEmailSearch(String email, int page);
+
+
+    int getUserCountsByFussyEmailSearch(String email);
+
 }

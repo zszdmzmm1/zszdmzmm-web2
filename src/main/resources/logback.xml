@@ -19,5 +19,5 @@
         <appender-ref ref="FILE"/>
     </root>
 
-<!--    <logger name="day0904.mybatis.mapper" level="WARN" />-->
+    <logger name="day0904.mybatis.mapper" level="WARN" />
 </configuration>

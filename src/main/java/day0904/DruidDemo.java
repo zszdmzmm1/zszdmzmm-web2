@@ -40,6 +40,7 @@ public class DruidDemo implements IUserDau {
         }
     }
 
+    @Override
     public User getUserByEmail(String email) {
         String query = "select id, password, role from user where email = ?";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
@@ -57,7 +58,7 @@ public class DruidDemo implements IUserDau {
         return null;
     }
 
-
+    @Override
     public User getUserById(int id) {
         String query = "select email, password, role from user where id = ?";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
@@ -76,6 +77,7 @@ public class DruidDemo implements IUserDau {
         return null;
     }
 
+    @Override
     public List<User> getAllUser() {
         String query = "select id, email, password, role from user";
         List<User> userList = new ArrayList<>();
@@ -87,6 +89,7 @@ public class DruidDemo implements IUserDau {
         return userList;
     }
 
+    @Override
     public int getUserCount() {
         String query = "select count(*) from user";
         int count = 0;
@@ -101,13 +104,12 @@ public class DruidDemo implements IUserDau {
         return count;
     }
 
+    @Override
     public List<User> getAPageUser(int page) {
-        int beginIndex = (page - 1) * 10;
         String query = "select id, email, password, role from user limit ?, 10";
         List<User> userList = new ArrayList<>();
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(query)) {
-            System.out.println(dataSource);
-            ppstmt.setInt(1, beginIndex);
+            ppstmt.setInt(1, page);
             readGetUserResult(userList, ppstmt);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,6 +128,7 @@ public class DruidDemo implements IUserDau {
         }
     }
 
+    @Override
     public void addUser(User user) {
         String insertSql = "insert into user(email, password) values(?, ?);";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
@@ -137,6 +140,7 @@ public class DruidDemo implements IUserDau {
         }
     }
 
+    @Override
     public void addUserLog(UserLog userLog) {
         String insertSql = "insert into `user-log`(`user-id`, time, behavior) values(?, ?, ?);";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
@@ -149,6 +153,7 @@ public class DruidDemo implements IUserDau {
         }
     }
 
+    @Override
     public void deleteUser(int id) {
         String insertSql = "delete from user where id = ?;";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
@@ -159,6 +164,7 @@ public class DruidDemo implements IUserDau {
         }
     }
 
+    @Override
     public void updateUser(int id, String email, String password) {
         String insertSql = "update user set email = ? , password = ? where id = ?;";
         try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
@@ -169,5 +175,42 @@ public class DruidDemo implements IUserDau {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<User> getUsersByFussyEmailSearch(String email, int page) {
+        List<User> userList = new ArrayList<>();
+        String insertSql = "select id, email, password, role from user where email like ? limit ?, 10;";
+        try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
+            ppstmt.setString(1, "%" + email + "%");
+            ppstmt.setInt(2, page);
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                String id = "u" + rs.getInt("id");
+                email = rs.getString("email");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                userList.add(new User(id, email, password, role));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    @Override
+    public int getUserCountsByFussyEmailSearch(String email) {
+        int count = 0;
+        String insertSql = "select count(*) from user where email like ?;";
+        try (PreparedStatement ppstmt = dataSource.getConnection().prepareStatement(insertSql)) {
+            ppstmt.setString(1, "%" + email + "%");
+            ResultSet rs = ppstmt.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt("count(*)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

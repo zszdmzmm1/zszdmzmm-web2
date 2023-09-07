@@ -113,13 +113,13 @@
         <div class="content-wrapper" style="min-height: 1604.44px;">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">用户列表</h3>
+                    <h1 class="card-title text-bold text-secondary display-5">用户列表</h1>
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right"
-                                   placeholder="Search">
+                        <div class="input-group input-group-sm" style="width: 300px; height: 50px">
+                            <input type="text" name="table_search" class="form-control"
+                                   placeholder="Search" id="user-search">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
+                                <button type="button" class="btn btn-default" id="user-search-btn">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -164,7 +164,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <button class="btn btn-default">删除</button>
+                                    <button class="btn btn-default" id="mul-delete">多选</button>
                                 </th>
                             </tr>
                         </thead>
@@ -228,7 +228,7 @@
                         </li>
                     </c:if>
                     <li class="page-item"><span class="page-link">${page}</span></li>
-                    <c:if test="${page != pageCount}">
+                    <c:if test="${page != pageCount && pageCount != 0}">
                         <li class="page-item">
                             <a class="page-link" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
@@ -246,6 +246,7 @@
     <script>
         $(".page-link").click(function () {
             let page = ${page};
+            let email = "${sEmail}";
             if ($(this).attr("aria-label") === "Next") {
                 page += 1;
             } else if ($(this).attr("aria-label") === "Previous") {
@@ -253,12 +254,11 @@
             } else {
                 page = parseInt($(this).text());
             }
-            if (page < 1) {
-                page = 1;
-            } else if (page > ${pageCount}) {
-                page = ${pageCount};
+            if(email === ""){
+                window.location.href = "admin/user?page=" + page;
+            }else{
+                window.location.href = "admin/user?page=" + page + "&sEmail=" + email;
             }
-            window.location.href = "admin/user?page=" + page;
         })
 
 
@@ -324,6 +324,41 @@
                 .done(function () {
                     window.location.reload();
                 })
+        });
+
+        $("#user-search-btn").click(function () {
+            let email = $("#user-search").val();
+            window.location.href = "user-search?sEmail=" + email;
+        })
+
+
+        $("#mul-delete").click(function (){
+            if($("#confirm-mul-delete").length === 0){
+                $(this).after(`<button class="btn btn-default" id="confirm-mul-delete">删除</button>`);
+                $(".delete").after(`<input type="checkbox" class="checkbox delete-check"/>`);
+                $("#confirm-mul-delete").click(function (){
+                    let isConfirm = confirm("是否确定删除？");
+                    if(isConfirm){
+                        let ids = [];
+                        $(".delete-check:checked").each(function (){
+                            ids.push($(this).parent().parent().attr("id"));
+                        });
+                        let sId = String(ids);
+                        $.ajax({
+                            method: "GET",
+                            url: "deleteUsers",
+                            data: {sId: sId}
+                        })
+                            .done(function (){
+                                window.location.reload();
+                                alert("删除成功");
+                            })
+                    }
+                })
+            } else{
+                $("#confirm-mul-delete").remove();
+                $(".delete-check").remove();
+            }
         })
     </script>
 </body>

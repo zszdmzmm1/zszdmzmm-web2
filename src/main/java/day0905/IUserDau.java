@@ -23,4 +23,9 @@ public interface IUserDau {
     void deleteUser(int id);
 
     void updateUser(int id, String email, String password);
+
+    List<User> getUsersByFussyEmailSearch(String email, int page);
+
+
+    int getUserCountsByFussyEmailSearch(String email);
 }

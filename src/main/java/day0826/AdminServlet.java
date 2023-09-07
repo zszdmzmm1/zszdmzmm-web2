@@ -18,22 +18,34 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<User> userList = null;
+        int count;
+        int pageCount = 0;
         IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
         String sPage = req.getParameter("page");
+        String email = req.getParameter("sEmail");
         int page;
+        if (email == null) {
+            email = "";
+        }
         if (sPage == null) {
             page = 1;
         } else {
             page = Integer.parseInt(sPage);
         }
-        List<User> userList = connector.getAPageUser((page - 1) * 10);
-        int count = connector.getUserCount();
-        int pageCount;
+        if ("search".equals(req.getSession().getAttribute("mode"))) {
+            userList = connector.getUsersByFussyEmailSearch(email, (page - 1) * 10);
+            count = connector.getUserCountsByFussyEmailSearch(email);
+        } else {
+            userList = connector.getAPageUser((page - 1) * 10);
+            count = connector.getUserCount();
+        }
         if (count % 10 == 0) {
             pageCount = count / 10;
         } else {
             pageCount = count / 10 + 1;
         }
+        req.setAttribute("sEmail", email);
         req.setAttribute("count", count);
         req.setAttribute("page", page);
         req.setAttribute("pageCount", pageCount);
