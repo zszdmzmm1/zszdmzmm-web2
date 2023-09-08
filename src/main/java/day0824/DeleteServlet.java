@@ -1,6 +1,6 @@
 package day0824;
 
-import day0905.IUserDau;
+import day0905.UserDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
+        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         int realId = Integer.parseInt(req.getParameter("id").substring(1));
         connector.deleteUser(realId);
     }

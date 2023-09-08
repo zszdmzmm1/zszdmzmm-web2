@@ -1,7 +1,7 @@
 package day0815;
 
 import day0904.mybatis.po.User;
-import day0904.DruidDemo;
+import day0904.UserDaoJDBCImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/register-verify")
 public class RegisterServlet extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
+    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getDruidDemo();
 
 
     @Override
@@ -23,12 +23,12 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = druidDemo.getUserByEmail(req.getParameter("email"));
+        User user = userDaoJDBCImpl.getUserByEmail(req.getParameter("email"));
         if(user != null){
             req.setAttribute("user", "该用户已存在！");
         }else {
             user = new User(req.getParameter("email"), req.getParameter("password"), "用户");
-            druidDemo.addUser(user);
+            userDaoJDBCImpl.addUser(user);
             req.setAttribute("user", user);
         }
         req.getRequestDispatcher("./welcome-page").forward(req, resp);

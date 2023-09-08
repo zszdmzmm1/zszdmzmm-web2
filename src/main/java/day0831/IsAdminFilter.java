@@ -3,7 +3,7 @@ package day0831;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
 
-import day0905.IUserDau;
+import day0905.UserDao;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -22,7 +22,7 @@ import java.util.Date;
 public class IsAdminFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
+        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         HttpSession session = req.getSession();
         User user =(User)session.getAttribute("user");
         if(user == null || !"管理员".equals(user.getRole())){

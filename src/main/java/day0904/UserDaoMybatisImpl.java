@@ -1,7 +1,6 @@
 package day0904;
 
 import day0904.mybatis.mapper.UserMapper;
-import day0904.mybatis.po.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class MybatisMapper {
+public class UserDaoMybatisImpl {
 /*    private MybatisMapper() {
     }
 

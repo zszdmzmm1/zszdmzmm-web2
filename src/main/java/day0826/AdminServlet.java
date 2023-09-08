@@ -1,7 +1,7 @@
 package day0826;
 
 import day0904.mybatis.po.User;
-import day0905.IUserDau;
+import day0905.UserDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ public class AdminServlet extends HttpServlet {
         List<User> userList = null;
         int count;
         int pageCount = 0;
-        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
+        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         String sPage = req.getParameter("page");
         String email = req.getParameter("sEmail");
         int page;

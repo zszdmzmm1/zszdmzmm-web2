@@ -3,7 +3,7 @@ package day0904;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import day0904.mybatis.po.User;
 import day0904.mybatis.po.UserLog;
-import day0905.IUserDau;
+import day0905.UserDao;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class DruidDemo implements IUserDau {
+public class UserDaoJDBCImpl implements UserDao {
 
     private static DataSource dataSource;
 
-    private DruidDemo(){
+    private UserDaoJDBCImpl(){
     }
 
     private static final class DruidDemoHolder {
-        private static final DruidDemo DRUID_DEMO = new DruidDemo();
+        private static final UserDaoJDBCImpl DRUID_DEMO = new UserDaoJDBCImpl();
     }
 
-    public static DruidDemo getDruidDemo() {
+    public static UserDaoJDBCImpl getDruidDemo() {
         return DruidDemoHolder.DRUID_DEMO;
     }
 
@@ -31,7 +31,7 @@ public class DruidDemo implements IUserDau {
     static {
         Properties prop = new Properties();
         //Connection connection = null;
-        try (InputStream inputStream = DruidDemo.class.getClassLoader().getResourceAsStream("druid.properties")){
+        try (InputStream inputStream = UserDaoJDBCImpl.class.getClassLoader().getResourceAsStream("druid.properties")){
             prop.load(inputStream);
             dataSource = DruidDataSourceFactory.createDataSource(prop);
             //从池子中获得连接

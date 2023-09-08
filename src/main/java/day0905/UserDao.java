@@ -5,7 +5,7 @@ import day0904.mybatis.po.UserLog;
 
 import java.util.List;
 
-public interface IUserDau {
+public interface UserDao {
     User getUserById(int id);
 
     User getUserByEmail(String email);

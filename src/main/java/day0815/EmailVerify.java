@@ -1,7 +1,7 @@
 package day0815;
 
 import day0904.mybatis.po.User;
-import day0904.DruidDemo;
+import day0904.UserDaoJDBCImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,11 +12,11 @@ import java.io.IOException;
 
 @WebServlet("/emailVerify")
 public class EmailVerify extends HttpServlet {
-    DruidDemo druidDemo = DruidDemo.getDruidDemo();
+    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getDruidDemo();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email").trim();
-        User user = druidDemo.getUserByEmail(email);
+        User user = userDaoJDBCImpl.getUserByEmail(email);
         if(user != null){
             resp.addHeader("isEmailTaken", "true");
         }

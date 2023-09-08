@@ -1,13 +1,8 @@
 package day0826;
 
 import day0904.mybatis.po.User;
-import day0905.IUserDau;
+import day0905.UserDao;
 import day0906.MessageSender;
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +17,7 @@ import java.util.Random;
 public class GetEmailCodeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
+        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         String email = req.getParameter("email");
         User user = connector.getUserByEmail(email);
         if(user == null){

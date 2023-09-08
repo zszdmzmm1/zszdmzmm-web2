@@ -1,8 +1,8 @@
 package day0901;
 
-import day0904.DruidDemo;
-import day0904.MybatisMapper;
-import day0905.IUserDau;
+import day0904.UserDaoJDBCImpl;
+import day0904.UserDaoMybatisImpl;
+import day0905.UserDao;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -14,13 +14,13 @@ public class GlobalAttributeSetterListener implements ServletContextListener {
         sce.getServletContext().setAttribute("totalNumberOfLoginUser", 0);
         sce.getServletContext().setAttribute("totalNumberOfOnlineVisitor", 0);
         String connector = sce.getServletContext().getInitParameter("connector");
-        IUserDau iUserDau = null;
+        UserDao userDao = null;
         if(connector.equals("mybatis")){
-            iUserDau = MybatisMapper.mapper;
+            userDao = UserDaoMybatisImpl.mapper;
         }else if(connector.equals("JDBC")){
-            iUserDau = DruidDemo.getDruidDemo();
+            userDao = UserDaoJDBCImpl.getDruidDemo();
         }
-        sce.getServletContext().setAttribute("connector", iUserDau);
+        sce.getServletContext().setAttribute("connector", userDao);
     }
 
     @Override

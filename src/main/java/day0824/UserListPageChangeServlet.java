@@ -2,7 +2,7 @@ package day0824;
 
 
 import day0904.mybatis.po.User;
-import day0905.IUserDau;
+import day0905.UserDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserListPageChangeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        IUserDau connector = (IUserDau) req.getSession().getServletContext().getAttribute("connector");
+        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         int page = Integer.parseInt(req.getParameter("page"));
         String target = req.getParameter("target");
         if(target.equals("Previous")){
