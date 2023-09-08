@@ -1,7 +1,8 @@
 package day0824;
 
 import day0904.mybatis.po.User;
-import day0905.UserDao;
+import day0908.UserService;
+import day0908.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,18 +16,12 @@ import java.io.IOException;
 public class UpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         int id = Integer.parseInt(req.getParameter("id").substring(1));
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = connector.getUserById(id);
-        if("".equals(email)){
-            email = user.getEmail();
-        }
-        if("".equals(password)){
-            password = user.getPassword();
-        }
-        connector.updateUser(id, email, password);
+        User updateUser = new User(email, password, "");
+        UserService userService = UserServiceImpl.getInstance();
+        userService.updateService(id, updateUser);
     }
 
     @Override

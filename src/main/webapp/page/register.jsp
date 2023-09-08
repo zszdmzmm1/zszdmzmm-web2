@@ -217,7 +217,7 @@
                             if (check($("#user")) && check($("#password"))) {
                                 $.ajax({
                                     method: "POST",
-                                    url: "RegisterServlet",
+                                    url: "registerProcessing",
                                     data: {email: email, password: password},
                                     dataType: "json"
                                 })

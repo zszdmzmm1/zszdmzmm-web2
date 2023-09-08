@@ -18,7 +18,7 @@ public class GlobalAttributeSetterListener implements ServletContextListener {
         if(connector.equals("mybatis")){
             userDao = UserDaoMybatisImpl.mapper;
         }else if(connector.equals("JDBC")){
-            userDao = UserDaoJDBCImpl.getDruidDemo();
+            userDao = UserDaoJDBCImpl.getUserDaoJDBC();
         }
         sce.getServletContext().setAttribute("connector", userDao);
     }

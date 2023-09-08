@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/emailVerify")
 public class EmailVerify extends HttpServlet {
-    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getDruidDemo();
+    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getUserDaoJDBC();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email").trim();

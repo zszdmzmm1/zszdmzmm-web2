@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/register-verify")
 public class RegisterServlet extends HttpServlet {
-    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getDruidDemo();
+    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getUserDaoJDBC();
 
 
     @Override

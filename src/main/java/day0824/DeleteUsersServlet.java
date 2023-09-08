@@ -1,6 +1,7 @@
 package day0824;
 
-import day0905.UserDao;
+import day0908.UserService;
+import day0908.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,13 +16,11 @@ import java.util.List;
 public class DeleteUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDao connector =(UserDao) req.getSession().getServletContext().getAttribute("connector");
         String sId = req.getParameter("sId");
         String[] idArray = sId.split(",");
         List<String> idList = new ArrayList<>(List.of(idArray));
-        for (String id: idList) {
-            connector.deleteUser(Integer.parseInt(id.substring(1)));
-        }
+        UserService userService = UserServiceImpl.getInstance();
+        userService.deleteUsersService(idList);
     }
 
     @Override

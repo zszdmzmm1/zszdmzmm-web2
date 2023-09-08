@@ -13,7 +13,7 @@ import java.util.List;
 
 @WebServlet("/homepage")
 public class LoginServlet extends HttpServlet {
-    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getDruidDemo();
+    UserDaoJDBCImpl userDaoJDBCImpl = UserDaoJDBCImpl.getUserDaoJDBC();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

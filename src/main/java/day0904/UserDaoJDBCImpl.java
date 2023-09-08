@@ -19,12 +19,13 @@ public class UserDaoJDBCImpl implements UserDao {
     private UserDaoJDBCImpl(){
     }
 
-    private static final class DruidDemoHolder {
-        private static final UserDaoJDBCImpl DRUID_DEMO = new UserDaoJDBCImpl();
+
+    private static final class UserDaoJDBCHolder {
+        private static final UserDaoJDBCImpl USER_DAO_JDBC = new UserDaoJDBCImpl();
     }
 
-    public static UserDaoJDBCImpl getDruidDemo() {
-        return DruidDemoHolder.DRUID_DEMO;
+    public static UserDaoJDBCImpl getUserDaoJDBC() {
+        return UserDaoJDBCHolder.USER_DAO_JDBC;
     }
 
 
