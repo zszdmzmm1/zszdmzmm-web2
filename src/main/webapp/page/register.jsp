@@ -111,12 +111,12 @@
                     <div class="row mb-2 w-75 mx-auto mb-4">
                         <label class="col-form-label col-lg-3 col-xxl-2 text-lg-end text-start"
                                for="verify-code">验证码</label>
-                        <div class="col-lg-9 col-xxl-10 position-relative">
+                        <div class="col-lg-9 col-xxl-10">
                             <input class="form-control mb-3" type="text" id="verify-code" name="verify-code"
                                    required>
                             <%--<img src="setVerifyCodeServlet" alt="验证"
                                  onclick="this.src='setVerifyCodeServlet?'+ Math.random()">--%>
-                            <button class="btn btn-danger" id="emailCode">获取验证码</button>
+                            <button type="button" class="btn btn-danger" id="emailCode">获取验证码</button>
                         </div>
                     </div>
                     <div class="row w-75 mx-auto">
@@ -238,9 +238,11 @@
             })
 
             $("#emailCode").click(function (){
+                let email = $("#email").val();
                 $.ajax({
                     method: "GET",
                     url: "GetEmailCode",
+                    data: {email: email}
                 })
                     .done(function (){
                         if($("#email").val().trim() !== ""){
@@ -252,6 +254,9 @@
                         } else{
                             alert("请输入邮箱号");
                         }
+                    })
+                    .fail(function (){
+                        alert("发送失败，邮箱已注册");
                     })
             })
 
