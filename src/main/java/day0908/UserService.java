@@ -16,4 +16,8 @@ public interface UserService {
     void updateService(int id, User updateUser);
 
     MessageDTO getAPageUserService(int page);
+
+    MessageDTO adminService(int page);
+
+    MessageDTO userSearchService(int page, String email);
 }

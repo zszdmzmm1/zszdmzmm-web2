@@ -88,4 +88,20 @@ public class UserServiceImpl implements UserService {
         messageDTO.setObject(userList);
         return messageDTO;
     }
+
+    @Override
+    public MessageDTO adminService(int page) {
+        List<User> userList = userDao.getAPageUser((page - 1) * 10);
+        int count = userDao.getUserCount();
+        return new MessageDTO(String.valueOf(count), userList, 100);
+    }
+
+    @Override
+    public MessageDTO userSearchService(int page, String email) {
+        List<User> userList = userDao.getUsersByFussyEmailSearch(email, (page - 1) * 10);
+        int count = userDao.getUserCountsByFussyEmailSearch(email);
+        return new MessageDTO(String.valueOf(count), userList, 100);
+    }
+
+
 }

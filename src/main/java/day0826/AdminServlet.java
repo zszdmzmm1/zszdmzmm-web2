@@ -2,6 +2,10 @@ package day0826;
 
 import day0904.mybatis.po.User;
 import day0905.UserDao;
+import day0908.MessageDTO;
+import day0908.UserService;
+import day0908.UserServiceImpl;
+import jakarta.mail.Message;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,28 +22,26 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> userList = null;
-        int count;
-        int pageCount = 0;
-        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         String sPage = req.getParameter("page");
         String email = req.getParameter("sEmail");
-        int page;
+        String mode = (String) req.getSession().getAttribute("mode");
+        int count;
+        MessageDTO messageDTO;
+        int pageCount;
+        UserService userService = UserServiceImpl.getInstance();
+        int page = 1;
         if (email == null) {
             email = "";
         }
-        if (sPage == null) {
-            page = 1;
-        } else {
+        if (sPage != null) {
             page = Integer.parseInt(sPage);
         }
-        if ("search".equals(req.getSession().getAttribute("mode"))) {
-            userList = connector.getUsersByFussyEmailSearch(email, (page - 1) * 10);
-            count = connector.getUserCountsByFussyEmailSearch(email);
+        if ("search".equals(mode)) {
+            messageDTO = userService.userSearchService(page, email);
         } else {
-            userList = connector.getAPageUser((page - 1) * 10);
-            count = connector.getUserCount();
+            messageDTO = userService.adminService(page);
         }
+        count = Integer.parseInt(messageDTO.getMessage());
         if (count % 10 == 0) {
             pageCount = count / 10;
         } else {
@@ -49,7 +51,7 @@ public class AdminServlet extends HttpServlet {
         req.setAttribute("count", count);
         req.setAttribute("page", page);
         req.setAttribute("pageCount", pageCount);
-        req.setAttribute("userList", userList);
+        req.setAttribute("userList", messageDTO.getObject());
         req.getRequestDispatcher("../page/admin.jsp").forward(req, resp);
     }
 
