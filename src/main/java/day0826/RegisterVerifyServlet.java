@@ -1,8 +1,9 @@
 package day0826;
 
 import com.alibaba.fastjson.JSONObject;
-import day0904.mybatis.po.User;
-import day0905.UserDao;
+import day0908.MessageDTO;
+import day0908.UserService;
+import day0908.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,13 +18,11 @@ public class RegisterVerifyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDao connector = (UserDao) req.getSession().getServletContext().getAttribute("connector");
         String email = req.getParameter("email").trim();
-        User user = connector.getUserByEmail(email);
+        UserService userService = UserServiceImpl.getInstance();
+        MessageDTO messageDTO = userService.registerVerify(email);
         JSONObject jsonObject = new JSONObject();
-        if (user != null) {
-            jsonObject.put("message", "邮箱已被占用");
-        }
+        jsonObject.put("message", messageDTO.getMessage());
         PrintWriter out = resp.getWriter();
         out.println(jsonObject);
     }

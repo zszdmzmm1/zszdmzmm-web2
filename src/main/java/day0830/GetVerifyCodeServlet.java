@@ -16,13 +16,13 @@ public class GetVerifyCodeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String fromVerifyCode = (String)session.getAttribute("verifyCode");
+        String fromVerifyCode = (String) session.getAttribute("verifyCode");
         String toVerifyCode = req.getParameter("verifyCode");
         PrintWriter out = resp.getWriter();
-        JSONObject jsonObject =  new JSONObject();
-        if(!fromVerifyCode.equals(toVerifyCode)){
+        JSONObject jsonObject = new JSONObject();
+        if (!fromVerifyCode.equals(toVerifyCode)) {
             jsonObject.put("message", "验证码错误");
-        }else{
+        } else {
             jsonObject.put("message", "验证码通过");
         }
         out.println(jsonObject);

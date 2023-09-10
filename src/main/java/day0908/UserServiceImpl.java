@@ -1,10 +1,14 @@
 package day0908;
 
+import com.alibaba.fastjson.JSONObject;
 import day0904.UserDaoMybatisImpl;
 import day0904.mybatis.po.User;
 import day0905.UserDao;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
+import java.util.Random;
 
 public class UserServiceImpl implements UserService {
     private static final UserDao userDao;
@@ -103,5 +107,57 @@ public class UserServiceImpl implements UserService {
         return new MessageDTO(String.valueOf(count), userList, 100);
     }
 
+    @Override
+    public MessageDTO getVerifyCode(String email) {
+        User user = userDao.getUserByEmail(email);
+        MessageDTO messageDTO = new MessageDTO();
+        if(user == null){
+            StringBuilder sVerifyCode = new StringBuilder();
+            Random random = new Random();
+            for(int i = 0; i < 4; i ++){
+                sVerifyCode.append(random.nextInt(10));
+            }
+            String verifyCode = sVerifyCode.toString();
+            messageDTO.setObject(verifyCode);
+            messageDTO.setCode(100);
+        }else{
+            messageDTO.setCode(999);
+        }
+        return messageDTO;
+    }
 
+    @Override
+    public MessageDTO registerVerify(String email) {
+        MessageDTO messageDTO = new MessageDTO();
+        User user = userDao.getUserByEmail(email);
+        if (user != null) {
+            messageDTO.setMessage("邮箱已被占用");
+        }
+        return messageDTO;
+    }
+
+    @Override
+    public MessageDTO loginProcessingService(String email, String password) {
+        User user = userDao.getUserByEmail(email);
+        MessageDTO messageDTO = new MessageDTO();
+        if(user == null){
+            messageDTO.setCode(999);
+            messageDTO.setMessage("未找到该用户！");
+        }else{
+            messageDTO.setObject(user);
+            if(password.equals(user.getPassword())){
+                if(user.getRole().equals("管理员")){
+                    messageDTO.setCode(100);
+                    messageDTO.setMessage("管理员");
+                }else{
+                    messageDTO.setCode(100);
+                    messageDTO.setMessage("用户");
+                }
+            } else {
+                messageDTO.setCode(999);
+                messageDTO.setMessage("密码错误！");
+            }
+        }
+        return messageDTO;
+    }
 }

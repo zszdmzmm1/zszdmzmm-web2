@@ -20,4 +20,11 @@ public interface UserService {
     MessageDTO adminService(int page);
 
     MessageDTO userSearchService(int page, String email);
+
+    MessageDTO getVerifyCode(String email);
+
+    MessageDTO registerVerify(String email);
+
+    MessageDTO loginProcessingService(String email, String password);
+
 }
