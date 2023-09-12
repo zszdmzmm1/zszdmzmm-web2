@@ -3,8 +3,13 @@
 <mapper namespace="day0912.mybatis.mapper.BlogListMapper">
     <sql id="select-column"> id, use_id as userId, title, cover, publish_time as publishTime, last_update_time as lastUpdateTime, content, view, description, status </sql>
 
+    <resultMap id="BlogListMap" type="BlogList">
+        <result column="use_id" property="userId"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
 
-    <select id="selectAll" resultType="BlogList">
-        select <include refid="select-column"/> from blog_list;
+    <select id="selectAll" resultMap="BlogListMap">
+        select * from blog_list;
     </select>
 </mapper>
