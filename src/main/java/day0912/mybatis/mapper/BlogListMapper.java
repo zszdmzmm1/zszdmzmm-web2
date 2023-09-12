@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BlogListMapper {
     List<BlogList> selectAll();
+
+    BlogList selectById(int id);
 }

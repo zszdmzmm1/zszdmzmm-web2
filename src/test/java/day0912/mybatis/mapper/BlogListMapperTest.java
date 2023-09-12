@@ -30,7 +30,6 @@ public class BlogListMapperTest {
     public void selectAllTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         List<BlogList> blogLists = mapper.selectAll();
-        System.out.println(blogLists.get(1));
         Assertions.assertTrue(blogLists.size() > 0);
     }
 
@@ -38,8 +37,14 @@ public class BlogListMapperTest {
     public void selectAllTest2() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         List<BlogList> blogLists = mapper.selectAll();
-        System.out.println(blogLists.get(1));
         Assertions.assertNotNull(blogLists.get(1).getPublishTime());
+    }
+
+    @Test
+    public void selectByIdTest(){
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+        BlogList blogList = mapper.selectById(2);
+        Assertions.assertNotNull(blogList.getPublishTime());
     }
 
 }

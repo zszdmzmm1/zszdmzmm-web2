@@ -12,4 +12,7 @@
     <select id="selectAll" resultMap="BlogListMap">
         select * from blog_list;
     </select>
+    <select id="selectById" resultMap="BlogListMap">
+        select * from blog_list where id = #{id};
+    </select>
 </mapper>
