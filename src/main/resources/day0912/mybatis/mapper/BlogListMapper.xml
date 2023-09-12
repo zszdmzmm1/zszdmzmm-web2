@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="day0912.mybatis.mapper.BlogListMapper">
+    <sql id="select-column"> id, use_id as userId, title, cover, publish_time as publishTime, last_update_time as lastUpdateTime, content, view, description, status </sql>
+
+
     <select id="selectAll" resultType="BlogList">
-        select id, use_id as userId, title, cover, publish_time as publishTime, last_update_time as lastUpdateTime, content, view, description, status from blog_list;
+        select <include refid="select-column"/> from blog_list;
     </select>
 </mapper>
