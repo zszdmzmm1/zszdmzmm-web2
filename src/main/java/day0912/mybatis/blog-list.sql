@@ -17,7 +17,7 @@ create table blog_list
         unique (id)
 );
 
-INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status)
+INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status, cover)
 VALUES (1, 'jsp结合了html与java', '2023-09-11 11:28:47', '2023-09-11 11:28:53',
 '##### 1.jsp的两种输出方式：<% %>标签 与<%= %>标签
 ![img_1.png](img/img_1.png)
@@ -32,9 +32,9 @@ VALUES (1, 'jsp结合了html与java', '2023-09-11 11:28:47', '2023-09-11 11:28:5
 可以看到：红框中的代码都在_jspService()方法之外。
 ##### 5.通过循环在页面上添加元素
 切记java与html的代码各司其职：
-![img_4.png](img/img_4.png)', 'jsp', 1);
+![img_4.png](img/img_4.png)', 'jsp', 1, 'image/H.png');
 
-INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status)
+INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status, cover)
 VALUES (1, 'java的基本数据类型(Primitive Data Types)', '2023-09-11 11:28:47', '2023-09-11 11:28:53',
         '### 1.什么是基本数据类型
 
@@ -171,9 +171,9 @@ Java 编程语言是静态类型语言(statically-typed)，这意味着变量的
     128(byte): 补码：1000 0000
 
     该补码较为特殊， 不可简单的通过取反加一求原码，其指代的数字为-128;
-```', '基本数据类型', 1);
+```', '基本数据类型', 1, 'image/H.png');
 
-INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status)
+INSERT INTO `blog_list` (user_id, title, publish_time, last_update_time, content, description, status, cover)
 VALUES (1, 'java基本数据类型与引用数据类型的存储方式', '2023-09-11 11:28:47', '2023-09-11 11:28:53',
         '在虚拟机中，存储位置分为栈(Stack)与堆(Heap)两个位置
 基本数据存储的是值，存在栈中，引用数据类型在栈中存储的是地址，地址指向了堆中的一个位置，在堆中相对应的位置放具体的值。
@@ -192,4 +192,4 @@ VALUES (1, 'java基本数据类型与引用数据类型的存储方式', '2023-0
 
 存储过程是：
 
-![img_2.png](img_2.png)', '基本数据类型存储', 1);
+![img_2.png](img_2.png)', '基本数据类型存储', 1, 'image/H.png');
