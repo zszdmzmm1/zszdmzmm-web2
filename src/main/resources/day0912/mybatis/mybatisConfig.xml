@@ -12,7 +12,7 @@
     </properties>
 
     <typeAliases>
-        <package name="day0904.mybatis.po"/>
+        <package name="day0912.mybatis.po"/>
     </typeAliases>
 
     <environments default="development">

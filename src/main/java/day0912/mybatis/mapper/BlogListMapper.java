@@ -1,5 +1,9 @@
 package day0912.mybatis.mapper;
 
-public class BlogListMapper {
+import day0912.mybatis.po.BlogList;
 
+import java.util.List;
+
+public interface BlogListMapper {
+    List<BlogList> selectAll();
 }

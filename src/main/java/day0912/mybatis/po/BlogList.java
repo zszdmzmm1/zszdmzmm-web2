@@ -3,7 +3,7 @@ package day0912.mybatis.po;
 import lombok.Data;
 
 @Data
-public class blogList {
+public class BlogList {
     int id;
     int userId;
     String title;
