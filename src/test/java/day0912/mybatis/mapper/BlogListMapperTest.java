@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class BlogListMapperTest {
     private static SqlSessionFactory sqlSessionFactory;
@@ -28,7 +29,10 @@ public class BlogListMapperTest {
     @Test
     public void selectAllTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
-        Assertions.assertTrue(mapper.selectAll().size() > 0);
+        List<BlogList> blogLists = mapper.selectAll();
+        System.out.println(blogLists.get(1));
+        Assertions.assertTrue(blogLists.size() > 0);
+        Assertions.assertNull(blogLists.get(1).getPublishTime());
     }
 
 }
