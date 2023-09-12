@@ -46,7 +46,7 @@
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-journal-text py-2 nav-item me-1"></i>
-                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="page/article.html">博客</a>
+                                <a class="me-3 py-2 link-body-emphasis text-decoration-none nav-link" href="page/article-list.html">博客</a>
                             </div>
                             <div class="d-flex">
                                 <i class="bi bi-github py-2 nav-item me-1"></i>
