@@ -15,4 +15,10 @@
     <select id="selectById" resultMap="BlogListMap">
         select * from blog_list where id = #{id};
     </select>
+    <select id="selectByCondition" resultMap="BlogListMap">
+        select * from blog_list
+        where title like '%${title}%'
+        and content like '%${content}%'
+        and status = #{status};
+    </select>
 </mapper>
