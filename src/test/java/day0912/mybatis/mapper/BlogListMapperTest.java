@@ -47,4 +47,11 @@ public class BlogListMapperTest {
         Assertions.assertNotNull(blogList.getPublishTime());
     }
 
+    @Test
+    public void selectByIdTest2(){
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+        BlogList blogList = mapper.selectById(2);
+        Assertions.assertEquals("java的基本数据类型(Primitive Data Types)", blogList.getTitle());
+    }
+
 }
