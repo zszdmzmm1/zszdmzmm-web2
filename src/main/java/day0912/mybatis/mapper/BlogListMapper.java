@@ -11,4 +11,6 @@ public interface BlogListMapper {
     BlogList selectById(int id);
 
     List<BlogList> selectByCondition(@Param("title") String title, @Param("content") String content, @Param("status") int status);
+
+    List<BlogList> selectByCondition(BlogList blogList);
 }

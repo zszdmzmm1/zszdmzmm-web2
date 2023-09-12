@@ -63,4 +63,16 @@ public class BlogListMapperTest {
         Assertions.assertTrue(blogLists.size() > 0);
     }
 
+    @Test
+    @DisplayName("通过条件搜索文章")
+    public void selectByConditionTest2(){
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+        BlogList blogList = new BlogList();
+        blogList.setTitle("java");
+        blogList.setContent("数据");
+        blogList.setStatus(1);
+        List<BlogList> blogLists = mapper.selectByCondition(blogList);
+        Assertions.assertTrue(blogLists.size() > 0);
+    }
+
 }
