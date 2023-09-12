@@ -11,7 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BlogListMapperTest {
     private static SqlSessionFactory sqlSessionFactory;
@@ -72,6 +74,18 @@ public class BlogListMapperTest {
         blogList.setContent("数据");
         blogList.setStatus(1);
         List<BlogList> blogLists = mapper.selectByCondition(blogList);
+        Assertions.assertTrue(blogLists.size() > 0);
+    }
+
+    @Test
+    @DisplayName("通过条件搜索文章")
+    public void selectByConditionTest3(){
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", "java");
+        map.put("content", "数据");
+        map.put("status", 1);
+        List<BlogList> blogLists = mapper.selectByCondition(map);
         Assertions.assertTrue(blogLists.size() > 0);
     }
 

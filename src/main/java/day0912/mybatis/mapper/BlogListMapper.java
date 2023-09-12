@@ -4,6 +4,7 @@ import day0912.mybatis.po.BlogList;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogListMapper {
     List<BlogList> selectAll();
@@ -13,4 +14,6 @@ public interface BlogListMapper {
     List<BlogList> selectByCondition(@Param("title") String title, @Param("content") String content, @Param("status") int status);
 
     List<BlogList> selectByCondition(BlogList blogList);
+
+    List<BlogList> selectByCondition(Map<String, Object> map);
 }
