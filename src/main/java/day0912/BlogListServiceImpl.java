@@ -1,14 +1,13 @@
 package day0912;
 
-import day0904.UserDaoMybatisImpl;
-import day0905.UserDao;
 import day0908.MessageDTO;
-import day0908.UserServiceImpl;
 import day0912.mybatis.mapper.BlogListMapper;
 import day0912.mybatis.po.BlogList;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.commonmark.Extension;
+import org.commonmark.ext.heading.anchor.HeadingAnchorExtension;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -50,9 +49,10 @@ public class BlogListServiceImpl {
 
     public MessageDTO articleServlet(int id) {
         BlogList blogList = mapper.selectById(id);
-        Parser parser = Parser.builder().build();
+        List<Extension> extensions = List.of(HeadingAnchorExtension.create());
+        Parser parser = Parser.builder().extensions(extensions).build();
         Node document = parser.parse(blogList.getContent());
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().extensions(extensions).build();
         String html = renderer.render(document);
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setMessage(html);

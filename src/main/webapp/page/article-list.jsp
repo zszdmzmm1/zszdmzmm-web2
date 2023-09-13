@@ -90,11 +90,11 @@
     <div class="mx-lg-auto">
       <div class="row">
         <c:forEach items="${blogList}" var="blog" varStatus="status">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-5">
             <article class="border-bottom h-100 pb-5  pt-md-0">
               <div class="row justify-content-between">
                 <div class="col-7">
-                  <h2 class="mb-2 h5"><a class="text-inherit" href="article?id=${blog.getId()}">${blog.getTitle()}</a></h2>
+                  <h2 class="mb-2 h5"><a class="text-inherit text-decoration-none link-body-emphasis" href="article?id=${blog.getId()}">${blog.getTitle()}</a></h2>
                   <div class="small text-muted">
                     <a href="#">${blog.getUserId()}</a>
                     <span> - </span>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-5">
                   <div class="d-flex">
-                    <a href="show.html" class="w-100">
+                    <a href="article?id=${blog.getId()}" class="w-100">
                       <img class="img-fluid shadow-sm rounded ratio-16x9" src="${blog.getCover()}">
                     </a>
                   </div>
@@ -112,124 +112,20 @@
             </article>
           </div>
         </c:forEach>
-<%--        <div class="col-md-6">
-          <article class="border-bottom h-100 pb-5  pt-md-0">
-            <div class="row justify-content-between">
-              <div class="col-7">
-                <h2 class="mb-2 h5"><a class="text-inherit" href="article-show.html">||||||||||||||||||||||||||||||</a></h2>
-                <div class="small text-muted">
-                  <a href="#">admin</a>
-                  <span> - </span>
-                  <span>2023-06-11 14:59:23.0</span>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="d-flex">
-                  <a href="show.html" class="w-100">
-                    <img class="img-fluid shadow-sm rounded ratio-16x9" src="../img/cover/default-cover.png">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6">
-          <article class="border-bottom h-100 pb-5 pt-5 pt-md-0">
-            <div class="row justify-content-between">
-              <div class="col-7">
-                <h2 class="mb-2 h5"><a class="text-inherit" href="show.html">maven 加速，修改镜像源</a></h2>
-                <div class="small text-muted">
-                  <a href="#">admin</a>
-                  <span> - </span>
-                  <span>2023-06-11 14:59:23.0</span>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="d-flex">
-                  <a href="show.html" class="w-100">
-                    <img class="img-fluid shadow-sm rounded ratio-16x9" src="../img/cover/maven-cover.png">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6">
-          <article class="border-bottom h-100 pb-5 pt-5 ">
-            <div class="row justify-content-between">
-              <div class="col-7">
-                <h2 class="mb-2 h5"><a class="text-inherit" href="show.html">composer 加速，修改镜像源</a></h2>
-                <div class="small text-muted">
-                  <a href="#">admin</a>
-                  <span> - </span>
-                  <span>2023-06-11 14:59:23.0</span>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="d-flex">
-                  <a href="show.html" class="w-100">
-                    <img class="img-fluid shadow-sm rounded ratio-16x9" src="../img/cover/composer-cover.png">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6">
-          <article class="border-bottom h-100 pb-5 pt-5 ">
-            <div class="row justify-content-between">
-              <div class="col-7">
-                <h2 class="mb-2 h5"><a class="text-inherit" href="show.html">yarn 加速，修改镜像源</a></h2>
-                <div class="small text-muted">
-                  <a href="#">admin</a>
-                  <span> - </span>
-                  <span>2023-06-11 14:59:23.0</span>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="d-flex">
-                  <a href="show.html" class="w-100">
-                    <img class="img-fluid shadow-sm rounded ratio-16x9" src="../img/cover/yarn-cover.png">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6">
-          <article class="border-bottom h-100 pb-5 pt-5 ">
-            <div class="row justify-content-between">
-              <div class="col-7">
-                <h2 class="mb-2 h5"><a class="text-inherit" href="show.html">npm 加速，修改镜像源</a></h2>
-                <div class="small text-muted">
-                  <a href="#">admin</a>
-                  <span> - </span>
-                  <span>2023-06-11 14:59:23.0</span>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="d-flex">
-                  <a href="show.html" class="w-100">
-                    <img class="img-fluid shadow-sm rounded ratio-16x9" src="../img/cover/npm-cover.png">
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>--%>
       </div>
 
 
     </div>
   </div>
 
-  <footer class="blog-footer mt-auto">
+  <%@ include file="./partials/footer.jsp" %>
+  <%--  <footer class="blog-footer mt-auto">
     <div class="container text-muted">
       <p class="text-center text-lg-left">
         <span>Designed by <a href="#">@you</a> - From X to Z</span>
       </p>
     </div>
-  </footer>
+  </footer>--%>
 
   <script type="module" src="build/assets/app.js"></script>
 </body>
