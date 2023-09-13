@@ -16,6 +16,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/build/assets/app.css">
     <title>${blog.getTitle()}</title>
+    <style>
+        .toc-link{
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
     <header class="mb-5">
@@ -90,19 +95,19 @@
     <section class="single-post container" id="main_content">
         <div class="row">
             <div class="col-lg-8">
-                <h2 class="title">${blog.getTitle()}</h2>
-                <p class="meta text-muted">
-                    <a href="#">${blog.getUserId()}</a>
+                <h2 class="title text-center animate__animated animate__fadeInTopLeft">${blog.getTitle()}</h2>
+                <p class="meta text-muted mb-5 text-center animate__animated animate__fadeInLeft ">
+                    <a href="#" class="text-body-secondary">${blog.getUserId()}</a>
                     <span> -- </span>
-                    发布于:${blog.getPublishTime()} 上次更新:${blog.getLastUpdateTime()}
+                    <span class="text-body-secondary">发布于:${blog.getPublishTime()} </span>
+                    <span class="text-body-secondary">上次更新:${blog.getLastUpdateTime()}</span>
                 </p>
                 <div id="vditor-preview-element" class="markdown-body js-toc-content animate__animated animate__fadeInLeft vditor-reset">
                     ${content}
                 </div>
             </div>
             <div class="col-lg-3 offset-lg-1">
-                <div id="outline"
-                     class="js-toc toc sticky-top d-none d-lg-block animate__animated animate__fadeInRight animate__delay-1s"></div>
+                <div id="outline" class="js-toc toc sticky-top d-none d-lg-block animate__animated animate__fadeInRight animate__delay-1s"></div>
             </div>
         </div>
     </section>
