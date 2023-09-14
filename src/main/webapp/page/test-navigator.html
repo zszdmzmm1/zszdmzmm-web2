@@ -8,24 +8,122 @@
     <title>测试导航页</title>
 </head>
 <body>
-    <h1>目录匹配：/user/*</h1>
+    <h1>day0913</h1>
     <ul>
-        <li><a href="../user/aa">/user/aa</a></li>
-        <li><a href="../user/bb">/user/bb</a></li>
+        <li>coding... 动态生成博客列表页，动态生成博客文章详情页，对应的servlet，service，dao</li>
     </ul>
-    <h1>后缀匹配：*.suffix</h1>
+    <h1>day0912</h1>
     <ul>
-        <li><a href="../user/aa.suffix">../user/aa.suffix</a> (满足目录匹配与后缀匹配，只执行了目录匹配)</li>
-        <li><a href="../aa.suffix">../aa.suffix</a></li>
-        <li><a href="./aa.suffix">./aa.suffix</a></li>
+        <li>coding...博客列表，博客详情页</li>
+        <li>测试类：assertNull()，assertNotNull()的使用方法</li>
     </ul>
-    <h1>任意匹配：/ || /*</h1>
     <ul>
-        <li><a href="../all/djf/dsd">../all/djf/dsd</a>(/* 覆盖了 /)</li>
+        commit:
+        <li>&lt;sql id="select-column"&gt;
+            ，resultMap：通过两种方式配置文件使java的pojo类属性与数据库columns的不同名但相对应的属性匹配
+        </li>
+        <li>BlogListMapperTest@selectByCondition 传参数： 向mybatis实现类传参数，通过接口方法形参处注释@param，或在xml文件中用默认参数指定法，如#{arg0},#{arg1},#{arg2}。</li>
+        <li>BlogListMapperTest@selectByCondition 传pojo类: 向mybatis实现类传具体java类，通过#{stateName}识别。</li>
+        <li>BlogListMapperTest@selectByCondition 传map： 顾名思义，同样可以通过#{key}识别。</li>
     </ul>
-    <h1>request方法</h1>
     <ul>
-        <li><a href="../request?abab">request</a></li>
+        markdown转html
+        <li>手动转成html</li>
+        <li>通过在线网站转成html</li>
+        <li>引入commonmark依赖</li>
+        <li>引入commonmark拓展依赖用于给h系列标签添加id，便于后期生成toc</li>
+    </ul>
+    <h1>day0911</h1>
+    <ul>
+        coding...
+    </ul>
+    <h1>day0910</h1>
+    <ul>
+        将service层从servlet中抽象出来
+    </ul>
+    <h1>day0908</h1>
+    <ul>coding... 修改页面样式</ul>
+    <h1>day0907</h1>
+    <ul>添加批量删除，查询的功能</ul>
+    <h1>day0906</h1>
+    <ul>
+        <li>学习SLF4J的代码结构，面向接口编程，通过修改配置，实现Dao层，JDBC与Mybatis实现的切换</li>
+    </ul>
+    <h1>day0905</h1>
+    <ul>
+        <li>用mybatis替换jdbc</li>
+        <li>引入原因：JDBC的代码依旧非常繁琐，需要进一步封装</li>
+        <li><a href="https://blog.mybatis.org/">官网</a></li>
+        <li>例子可见day0905.UserDaoMybatisImpl.java</li>
+    </ul>
+    <ul>
+        <li>SLF4J</li>
+        <li>更好的log系统，通过对这个包的结构观察，对我们写自己的代码结构有着借鉴意义，铭记面向接口编程</li>
+        <li><a href="https://www.slf4j.org/">官网</a></li>
+        <ul>
+            commit：
+            <li>Hello SLF4J: 第一个例子，运行报错，只引入api依赖，未引入实现依赖</li>
+            <li>SLF4J with NOP provider: 引入一个空的实现</li>
+            <li>SLF4J with Simple provider: 引入一个simple实现依赖</li>
+            <li>To switch logging frameworks, just replace slf4j binding on your class path: 通过依赖更换实现类到jdk17
+            </li>
+            <li>LogVSSout: 系统输出与log输出的区别</li>
+            <li>logback-classic: 引入一个classic实现依赖，可以脱离api依赖</li>
+            <li>parameterized messages: 带参log的写法</li>
+            <li>getLogger: 常规写法</li>
+            <li>LoggerAnnotation: 通过lombok依赖的注释简化写法</li>
+            <li>console appender: 通过配置更改log的内容</li>
+            <li>file appender: 通过配置将log内容写入文件</li>
+            <li>pattern property: 通过property配置log的pattern使适配多处，利于后续的维护修改</li>
+        </ul>
+    </ul>
+    <h1>day0904</h1>
+    <ul>
+        <li>线程池druid</li>
+        <li>引入原因：JDBC 的connection不适合单例，会引发线程问题，但若不单例，无限的new新的Connection会增加代码负担，线程池就是用来解决这一问题，通过new
+            一定数量的初始connection，限制最大的connection数量，有效的控制服务器的负担
+        </li>
+        <li><a href="https://github.com/alibaba/druid">官网</a></li>
+        <li>例子可见day0904.UserDaoJDBCImpl.java</li>
+    </ul>
+    <h1>day0901~day0903</h1>
+    <ul>coding...建设用户管理系统</ul>
+    <h1>Listener</h1>
+    <ul>
+        <li><a href="../MyHttpSessionAttributeServlet">监听SessionAttribute变化</a></li>
+        <li><a href="../setVerifyCodeServlet">监听Session变化</a></li>
+    </ul>
+    <h1>filterBase</h1>
+    <ul>
+        <li><a href="../MyFilterServlet?key1=value1">通过filter的实现类，改变传递的信息与加入cookie</a></li>
+        <li><a href="../FilterOrderServlet">filter的顺序通过配置文件修改</a></li>
+    </ul>
+    <h1>session</h1>
+    <ul>
+        <li><a href="../SetSession">setSession</a></li>
+        <li><a href="../GetSession">getSession</a></li>
+    </ul>
+    <h1>cookie</h1>
+    <ul>
+        <li><a href="../SetCookieServlet">设置cookie</a></li>
+        <li><a href="../ShowCookieServlet">显示cookie</a></li>
+    </ul>
+    <h1>jsp el 与jstl</h1>
+    <ul>
+        <li><a href="../jsp/day0822/el.jsp">el语言</a></li>
+        <li><a href="../jsp/day0822/jstl.jsp">jstl语言forEach</a></li>
+        <li><a href="../jsp/day0822/jstl2.jsp">jstl语言if</a></li>
+    </ul>
+    <h1>jsp</h1>
+    <ul>
+        <li><a href="../jsp/first.jsp">第一个jsp文件，两种输出方式</a></li>
+        <li><a href="../jsp/outof-doSerives.jsp">将方法与变量写在doService外</a></li>
+        <li><a href="../jsp/list.jsp">通过循环在页面添加多个元素</a></li>
+    </ul>
+    <h1>发送图片</h1>
+    <ul>
+        <li><a href="../img">下载图片</a></li>
+        <li><a href="../img-show">显示图片</a></li>
     </ul>
     <h1>跳转页面</h1>
     <ul>
@@ -34,43 +132,24 @@
         <li><a href="../redirectHttps">redirectHttps</a>跳转界面2</li>
         <li><a href="../forward-verse-redirect">forward-verse-redirect</a>forward与redirect</li>
     </ul>
-    <h1>发送图片</h1>
+    <h1>request方法</h1>
     <ul>
-        <li><a href="../img">下载图片</a></li>
-        <li><a href="../img-show">显示图片</a></li>
+        <li><a href="../request?abab">request</a></li>
     </ul>
-
-    <h1>jsp</h1>
+    <h1>任意匹配：/ || /*</h1>
     <ul>
-        <li><a href="../jsp/first.jsp">第一个jsp文件，两种输出方式</a></li>
-        <li><a href="../jsp/outof-doSerives.jsp">将方法与变量写在doService外</a></li>
-        <li><a href="../jsp/list.jsp">通过循环在页面添加多个元素</a></li>
+        <li><a href="../all/djf/dsd">../all/djf/dsd</a>(/* 覆盖了 /)</li>
     </ul>
-    <h1>jsp el 与jstl</h1>
+    <h1>后缀匹配：*.suffix</h1>
     <ul>
-        <li><a href="../jsp/day0822/el.jsp">el语言</a></li>
-        <li><a href="../jsp/day0822/jstl.jsp">jstl语言forEach</a></li>
-        <li><a href="../jsp/day0822/jstl2.jsp">jstl语言if</a></li>
+        <li><a href="../user/aa.suffix">../user/aa.suffix</a> (满足目录匹配与后缀匹配，只执行了目录匹配)</li>
+        <li><a href="../aa.suffix">../aa.suffix</a></li>
+        <li><a href="./aa.suffix">./aa.suffix</a></li>
     </ul>
-    <h1>cookie</h1>
+    <h1>目录匹配：/user/*</h1>
     <ul>
-        <li><a href="../SetCookieServlet">设置cookie</a></li>
-        <li><a href="../ShowCookieServlet">显示cookie</a></li>
-    </ul>
-    <h1>session</h1>
-    <ul>
-        <li><a href="../SetSession">setSession</a></li>
-        <li><a href="../GetSession">getSession</a></li>
-    </ul>
-    <h1>filterBase</h1>
-    <ul>
-        <li><a href="../MyFilterServlet?key1=value1">通过filter的实现类，改变传递的信息与加入cookie</a></li>
-        <li><a href="../FilterOrderServlet">filter的顺序通过配置文件修改</a></li>
-    </ul>
-    <h1>Listener</h1>
-    <ul>
-        <li><a href="../MyHttpSessionAttributeServlet">监听SessionAttribute变化</a></li>
-        <li><a href="../setVerifyCodeServlet">监听Session变化</a></li>
+        <li><a href="../user/aa">/user/aa</a></li>
+        <li><a href="../user/bb">/user/bb</a></li>
     </ul>
 </body>
 </html>
