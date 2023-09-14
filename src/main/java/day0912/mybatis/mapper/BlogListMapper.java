@@ -28,4 +28,6 @@ public interface BlogListMapper {
     void deleteById(int i);
 
     void deleteByIds(int[] ids);
+
+    void deleteByIds(List<Integer> ids);
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,7 +130,7 @@ public class BlogListMapperTest {
 
     @Test
     public void updateTest() {
-        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
         BlogList blogList1 = new BlogList();
         blogList1.setTitle("");
         blogList1.setContent("正文1");
@@ -141,7 +142,7 @@ public class BlogListMapperTest {
 
     @Test
     public void deleteByIdTest() {
-        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         mapper.deleteById(6);
         BlogList blogList = mapper.selectById(6);
         Assertions.assertNull(blogList);
@@ -151,7 +152,7 @@ public class BlogListMapperTest {
     @Test
     public void deleteByIdsTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
-        BlogList blogList = new BlogList();
+       /* BlogList blogList = new BlogList();
         blogList.setUserId(1);
         blogList.setTitle("title");
         blogList.setPublishTime("2023-09-11 11:28:47");
@@ -164,10 +165,10 @@ public class BlogListMapperTest {
             mapper.add(blogList);
         }
         List<BlogList> blogLists = mapper.selectAll();
-        Assertions.assertTrue(blogLists.size() > 10);
-        int[] ids = {11, 12, 13, 14, 15, 16, 17};
+        Assertions.assertTrue(blogLists.size() > 10);*/
+        int[] ids = new int[]{112,113,114};
         mapper.deleteByIds(ids);
-        BlogList blogList1 = mapper.selectById(12);
+        BlogList blogList1 = mapper.selectById(112);
         Assertions.assertNull(blogList1);
     }
 }

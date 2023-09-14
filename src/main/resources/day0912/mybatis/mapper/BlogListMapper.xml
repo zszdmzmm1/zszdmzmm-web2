@@ -82,12 +82,11 @@
         delete from blog_list
         where id = #{id}
     </delete>
+
     <delete id="deleteByIds">
-        delete from blog_list
-        <where>
-            <foreach collection="#{array}" item="i">
-                 id = #{i};
-            </foreach>
-        </where>
+        delete from blog_list where id in
+        <foreach collection="array" separator="," open="(" close=")" item="id">
+            #{id}
+        </foreach>
     </delete>
 </mapper>
