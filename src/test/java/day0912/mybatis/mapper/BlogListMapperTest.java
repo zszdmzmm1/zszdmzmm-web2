@@ -4,10 +4,10 @@ import day0912.mybatis.po.BlogList;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class BlogListMapperTest {
     private static SqlSessionFactory sqlSessionFactory;
+
     @BeforeAll
     public static void createSqlSessionFactory() throws IOException {
         String resource = "day0912/mybatis/mybatisConfig.xml";
@@ -44,14 +45,14 @@ public class BlogListMapperTest {
     }
 
     @Test
-    public void selectByIdTest(){
+    public void selectByIdTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList = mapper.selectById(2);
         Assertions.assertNotNull(blogList.getPublishTime());
     }
 
     @Test
-    public void selectByIdTest2(){
+    public void selectByIdTest2() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList = mapper.selectById(2);
         Assertions.assertEquals("java的基本数据类型(Primitive Data Types)", blogList.getTitle());
@@ -59,7 +60,7 @@ public class BlogListMapperTest {
 
     @Test
     @DisplayName("通过条件搜索文章")
-    public void selectByConditionTest(){
+    public void selectByConditionTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         List<BlogList> blogLists = mapper.selectByCondition("java", "数据", 1);
         Assertions.assertTrue(blogLists.size() > 0);
@@ -67,7 +68,7 @@ public class BlogListMapperTest {
 
     @Test
     @DisplayName("通过条件搜索文章")
-    public void selectByConditionTest2(){
+    public void selectByConditionTest2() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList = new BlogList();
         blogList.setTitle("java");
@@ -79,7 +80,7 @@ public class BlogListMapperTest {
 
     @Test
     @DisplayName("通过条件搜索文章")
-    public void selectByConditionTest3(){
+    public void selectByConditionTest3() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         Map<String, Object> map = new HashMap<>();
         map.put("title", "java");
@@ -89,4 +90,22 @@ public class BlogListMapperTest {
         Assertions.assertTrue(blogLists.size() > 0);
     }
 
+
+    @Test
+    public void selectByConditionWithDynamicSqlTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        BlogList blogList = new BlogList();
+        blogList.setStatus(1);
+        List<BlogList> blogLists = mapper.selectByConditionWithDynamicSql(blogList);
+        Assertions.assertEquals(1, blogLists.get(0).getStatus());
+    }
+
+    @Test
+    public void selectByConditionWithOneConditionTest(){
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        BlogList blogList = new BlogList();
+        blogList.setTitle("数据");
+        List<BlogList> blogLists = mapper.selectByConditionWithOneCondition(blogList);
+        Assertions.assertEquals(2, blogLists.size());
+    }
 }

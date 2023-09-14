@@ -16,4 +16,9 @@ public interface BlogListMapper {
     List<BlogList> selectByCondition(BlogList blogList);
 
     List<BlogList> selectByCondition(Map<String, Object> map);
+
+    List<BlogList> selectByConditionWithDynamicSql(BlogList blogList);
+
+    List<BlogList> selectByConditionWithOneCondition(BlogList blogList);
+
 }

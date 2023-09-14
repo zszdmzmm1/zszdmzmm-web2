@@ -21,4 +21,32 @@
         and content like '%${content}%'
         and status = #{status};
     </select>
+    <select id="selectByConditionWithDynamicSql" resultMap="BlogListMap">
+        select * from blog_list
+        <where>
+            <if test="status != 0">
+                and status = #{status}
+            </if>
+            <if test="title != null and title != ''">
+                and title like '%${title}%'
+            </if>
+            <if test="content != null and content != ''">
+                and content like '%#{content}%'
+            </if>
+        </where>
+    </select>
+    <select id="selectByConditionWithOneCondition" resultMap="BlogListMap">
+        select * from blog_list
+        <choose>
+            <when test="status != 0">
+                where status = #{status}
+            </when>
+            <when test="title != null and title != ''">
+                where title like '%${title}%'
+            </when>
+            <when test="content != null and content != ''">
+                where content like '%${content}%'
+            </when>
+        </choose>
+    </select>
 </mapper>
