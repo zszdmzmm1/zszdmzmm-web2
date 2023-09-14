@@ -4,14 +4,14 @@ import lombok.Data;
 
 @Data
 public class BlogList {
-    int id;
-    int userId;
-    String title;
-    String cover;
-    String publishTime;
-    String lastUpdateTime;
-    String content;
-    int view;
-    String description;
-    int status;
+    private int id;
+    private int userId;
+    private String title;
+    private String cover;
+    private String publishTime;
+    private String lastUpdateTime;
+    private String content;
+    private int view;
+    private String description;
+    private int status;
 }

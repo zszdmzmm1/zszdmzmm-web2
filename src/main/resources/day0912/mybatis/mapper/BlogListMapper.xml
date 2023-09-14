@@ -58,4 +58,23 @@
         insert into blog_list (user_id, title, cover, publish_time, last_update_time, content, view, description, status)
         values (#{userId}, #{title}, #{cover}, #{publishTime}, #{lastUpdateTime}, #{content}, #{view}, #{description}, #{status})
     </insert>
+
+    <update id="update">
+        update blog_list
+        <set>
+            <if test="blogList.title != null and blogList.title != ''">
+                title = #{blogList.title},
+            </if>
+            <if test="blogList.content != null and blogList.content != ''">
+                content = #{blogList.content},
+            </if>
+            <if test="blogList.description != null and blogList.description != ''">
+                description= #{blogList.description},
+            </if>
+            <if test="blogList.status != 0">
+                status = #{blogList.status},
+            </if>
+        </set>
+        where id = #{arg0}
+    </update>
 </mapper>

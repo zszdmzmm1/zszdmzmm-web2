@@ -111,8 +111,8 @@ public class BlogListMapperTest {
 
 
     @Test
-    public void add(){
-        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+    public void addTest(){
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList = new BlogList();
         blogList.setUserId(1);
         blogList.setTitle("title");
@@ -126,6 +126,21 @@ public class BlogListMapperTest {
         Assertions.assertTrue(blogLists.size() > 3);
     }
 
+
+
+    @Test
+    public void updateTest(){
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+
+
+        BlogList blogList1 = new BlogList();
+        blogList1.setTitle("title3");
+        blogList1.setContent("正文1");
+        blogList1.setDescription("简短描述");
+        blogList1.setStatus(1);
+        mapper.update(6, blogList1);
+        Assertions.assertEquals("title3", mapper.selectById(6).getTitle());
+    }
 
 
 }

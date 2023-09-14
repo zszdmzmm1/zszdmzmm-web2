@@ -22,4 +22,6 @@ public interface BlogListMapper {
     List<BlogList> selectByConditionWithOneCondition(BlogList blogList);
 
     void add(BlogList blogList);
+
+    void update(int i, @Param("blogList") BlogList blogList1);
 }
