@@ -101,7 +101,7 @@ public class BlogListMapperTest {
     }
 
     @Test
-    public void selectByConditionWithOneConditionTest(){
+    public void selectByConditionWithOneConditionTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
         BlogList blogList = new BlogList();
         blogList.setTitle("数据");
@@ -111,8 +111,8 @@ public class BlogListMapperTest {
 
 
     @Test
-    public void addTest(){
-        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
+    public void addTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
         BlogList blogList = new BlogList();
         blogList.setUserId(1);
         blogList.setTitle("title");
@@ -127,9 +127,8 @@ public class BlogListMapperTest {
     }
 
 
-
     @Test
-    public void updateTest(){
+    public void updateTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList1 = new BlogList();
         blogList1.setTitle("");
@@ -140,5 +139,35 @@ public class BlogListMapperTest {
         Assertions.assertEquals("tttt", mapper.selectById(6).getTitle());
     }
 
+    @Test
+    public void deleteByIdTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        mapper.deleteById(6);
+        BlogList blogList = mapper.selectById(6);
+        Assertions.assertNull(blogList);
+    }
 
+
+    @Test
+    public void deleteByIdsTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        BlogList blogList = new BlogList();
+        blogList.setUserId(1);
+        blogList.setTitle("title");
+        blogList.setPublishTime("2023-09-11 11:28:47");
+        blogList.setLastUpdateTime("2023-09-11 11:28:47");
+        blogList.setContent("正文");
+        blogList.setDescription("简短描述");
+        blogList.setStatus(1);
+
+        for (int i = 0; i < 10; i++) {
+            mapper.add(blogList);
+        }
+        List<BlogList> blogLists = mapper.selectAll();
+        Assertions.assertTrue(blogLists.size() > 10);
+        int[] ids = {11, 12, 13, 14, 15, 16, 17};
+        mapper.deleteByIds(ids);
+        BlogList blogList1 = mapper.selectById(12);
+        Assertions.assertNull(blogList1);
+    }
 }

@@ -77,4 +77,17 @@
         </set>
         where id = #{arg0}
     </update>
+
+    <delete id="deleteById">
+        delete from blog_list
+        where id = #{id}
+    </delete>
+    <delete id="deleteByIds">
+        delete from blog_list
+        <where>
+            <foreach collection="#{array}" item="i">
+                 id = #{i};
+            </foreach>
+        </where>
+    </delete>
 </mapper>

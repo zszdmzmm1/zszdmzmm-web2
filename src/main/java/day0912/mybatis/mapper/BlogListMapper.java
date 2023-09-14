@@ -24,4 +24,8 @@ public interface BlogListMapper {
     void add(BlogList blogList);
 
     void update(int i, @Param("blogList") BlogList blogList1);
+
+    void deleteById(int i);
+
+    void deleteByIds(int[] ids);
 }
