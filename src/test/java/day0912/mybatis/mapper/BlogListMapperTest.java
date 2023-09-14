@@ -108,4 +108,24 @@ public class BlogListMapperTest {
         List<BlogList> blogLists = mapper.selectByConditionWithOneCondition(blogList);
         Assertions.assertEquals(2, blogLists.size());
     }
+
+
+    @Test
+    public void add(){
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+        BlogList blogList = new BlogList();
+        blogList.setUserId(1);
+        blogList.setTitle("title");
+        blogList.setPublishTime("2023-09-11 11:28:47");
+        blogList.setLastUpdateTime("2023-09-11 11:28:47");
+        blogList.setContent("正文");
+        blogList.setDescription("简短描述");
+        blogList.setStatus(1);
+        mapper.add(blogList);
+        List<BlogList> blogLists = mapper.selectAll();
+        Assertions.assertTrue(blogLists.size() > 3);
+    }
+
+
+
 }

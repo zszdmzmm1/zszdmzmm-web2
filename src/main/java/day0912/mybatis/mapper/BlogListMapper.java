@@ -21,4 +21,5 @@ public interface BlogListMapper {
 
     List<BlogList> selectByConditionWithOneCondition(BlogList blogList);
 
+    void add(BlogList blogList);
 }

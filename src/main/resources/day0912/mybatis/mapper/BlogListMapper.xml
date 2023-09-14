@@ -12,15 +12,18 @@
     <select id="selectAll" resultMap="BlogListMap">
         select * from blog_list;
     </select>
+
     <select id="selectById" resultMap="BlogListMap">
         select * from blog_list where id = #{id};
     </select>
+
     <select id="selectByCondition" resultMap="BlogListMap">
         select * from blog_list
         where title like '%${title}%'
         and content like '%${content}%'
         and status = #{status};
     </select>
+
     <select id="selectByConditionWithDynamicSql" resultMap="BlogListMap">
         select * from blog_list
         <where>
@@ -35,6 +38,7 @@
             </if>
         </where>
     </select>
+
     <select id="selectByConditionWithOneCondition" resultMap="BlogListMap">
         select * from blog_list
         <choose>
@@ -49,4 +53,9 @@
             </when>
         </choose>
     </select>
+
+    <insert id="add">
+        insert into blog_list (user_id, title, cover, publish_time, last_update_time, content, view, description, status)
+        values (#{userId}, #{title}, #{cover}, #{publishTime}, #{lastUpdateTime}, #{content}, #{view}, #{description}, #{status})
+    </insert>
 </mapper>
