@@ -54,7 +54,7 @@
         </choose>
     </select>
 
-    <insert id="add">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into blog_list (user_id, title, cover, publish_time, last_update_time, content, view, description, status)
         values (#{userId}, #{title}, #{cover}, #{publishTime}, #{lastUpdateTime}, #{content}, #{view}, #{description}, #{status})
     </insert>

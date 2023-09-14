@@ -131,28 +131,9 @@ public class BlogListMapperTest {
     @Test
     public void updateTest() {
         BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
-        BlogList blogList1 = new BlogList();
-        blogList1.setTitle("");
-        blogList1.setContent("正文1");
-        blogList1.setDescription("简短描述");
-        blogList1.setStatus(1);
-        mapper.update(6, blogList1);
-        Assertions.assertEquals("tttt", mapper.selectById(6).getTitle());
-    }
-
-    @Test
-    public void deleteByIdTest() {
-        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
-        mapper.deleteById(6);
-        BlogList blogList = mapper.selectById(6);
-        Assertions.assertNull(blogList);
-    }
 
 
-    @Test
-    public void deleteByIdsTest() {
-        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
-       /* BlogList blogList = new BlogList();
+        BlogList blogList = new BlogList();
         blogList.setUserId(1);
         blogList.setTitle("title");
         blogList.setPublishTime("2023-09-11 11:28:47");
@@ -160,15 +141,74 @@ public class BlogListMapperTest {
         blogList.setContent("正文");
         blogList.setDescription("简短描述");
         blogList.setStatus(1);
+        mapper.add(blogList);
 
+
+        //-------------------------------------
+
+
+        BlogList blogList1 = new BlogList();
+        blogList1.setTitle("");
+        blogList1.setContent("正文1");
+        blogList1.setDescription("简短描述");
+        blogList1.setStatus(1);
+        mapper.update(blogList.getId(), blogList1);
+        BlogList blogList2 = mapper.selectById(blogList.getId());
+        Assertions.assertEquals("title", blogList2.getTitle());
+        Assertions.assertEquals("正文1", blogList2.getContent());
+    }
+
+    @Test
+    public void deleteByIdTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+
+
+        BlogList blogList = new BlogList();
+        blogList.setUserId(1);
+        blogList.setTitle("title");
+        blogList.setPublishTime("2023-09-11 11:28:47");
+        blogList.setLastUpdateTime("2023-09-11 11:28:47");
+        blogList.setContent("正文");
+        blogList.setDescription("简短描述");
+        blogList.setStatus(1);
+        mapper.add(blogList);
+
+//__________________________________________________
+
+
+        mapper.deleteById(blogList.getId());
+        blogList = mapper.selectById(blogList.getId());
+        Assertions.assertNull(blogList);
+    }
+
+
+    @Test
+    public void deleteByIdsTest() {
+        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
+
+
+        BlogList blogList = new BlogList();
+        blogList.setUserId(1);
+        blogList.setTitle("title");
+        blogList.setPublishTime("2023-09-11 11:28:47");
+        blogList.setLastUpdateTime("2023-09-11 11:28:47");
+        blogList.setContent("正文");
+        blogList.setDescription("简短描述");
+        blogList.setStatus(1);
+        int[] ids = new int[10];
         for (int i = 0; i < 10; i++) {
+            ids[i] = i;
             mapper.add(blogList);
         }
-        List<BlogList> blogLists = mapper.selectAll();
-        Assertions.assertTrue(blogLists.size() > 10);*/
-        int[] ids = new int[]{112,113,114};
+
+//        _____________________________________________
+
+
+
         mapper.deleteByIds(ids);
-        BlogList blogList1 = mapper.selectById(112);
-        Assertions.assertNull(blogList1);
+        for(int i = 0; i < ids.length; i++){
+            BlogList blogList1 = mapper.selectById(i);
+            Assertions.assertNull(blogList1);
+        }
     }
 }
