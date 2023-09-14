@@ -130,16 +130,14 @@ public class BlogListMapperTest {
 
     @Test
     public void updateTest(){
-        BlogListMapper mapper = sqlSessionFactory.openSession().getMapper(BlogListMapper.class);
-
-
+        BlogListMapper mapper = sqlSessionFactory.openSession(true).getMapper(BlogListMapper.class);
         BlogList blogList1 = new BlogList();
-        blogList1.setTitle("title3");
+        blogList1.setTitle("");
         blogList1.setContent("正文1");
         blogList1.setDescription("简短描述");
         blogList1.setStatus(1);
         mapper.update(6, blogList1);
-        Assertions.assertEquals("title3", mapper.selectById(6).getTitle());
+        Assertions.assertEquals("tttt", mapper.selectById(6).getTitle());
     }
 
 
