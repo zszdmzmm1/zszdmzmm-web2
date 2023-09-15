@@ -1,8 +1,7 @@
 package day0915.demo;
 
+import day0915.demo.dao.UserDao;
 import day0915.demo.service.UserService;
-import day0915.demo.service.impl.NopUserService;
-import day0915.demo.service.impl.SimpleUserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AppIoC {
@@ -16,8 +15,7 @@ public class AppIoC {
         System.out.println("-------------");
 
 
-        NopUserService nopUserService = ac.getBean(NopUserService.class);
-        nopUserService.showLoginService();
-        nopUserService.loginService();
+        UserDao userDao = ac.getBean(UserDao.class);
+        userDao.login();
     }
 }
