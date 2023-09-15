@@ -4,7 +4,7 @@ import day0915.demo.dao.UserDao;
 import day0915.demo.dao.impl.UserDaoImpl;
 import day0915.demo.service.UserService;
 
-public class UserServiceImpl implements UserService {
+public class SimpleUserService implements UserService {
     UserDao userDao = new UserDaoImpl();
     @Override
     public void showLoginService() {

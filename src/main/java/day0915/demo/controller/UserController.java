@@ -1,10 +1,10 @@
 package day0915.demo.controller;
 
 import day0915.demo.service.UserService;
-import day0915.demo.service.impl.UserServiceImpl;
+import day0915.demo.service.impl.NopUserService;
 
 public class UserController {
-    UserService userService = new UserServiceImpl();
+    UserService userService = new NopUserService();
 
     public void showLogin() {
         userService.showLoginService();
