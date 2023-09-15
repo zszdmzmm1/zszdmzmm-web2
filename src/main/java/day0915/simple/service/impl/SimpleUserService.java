@@ -2,9 +2,10 @@ package day0915.simple.service.impl;
 
 import day0915.simple.dao.UserDao;
 import day0915.simple.service.UserService;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class SimpleUserService implements UserService, InitializingBean {
+public class SimpleUserService implements UserService, InitializingBean, DisposableBean {
     UserDao userDao;
 
     public SimpleUserService() {
@@ -35,5 +36,10 @@ public class SimpleUserService implements UserService, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("SimpleUserService.afterPropertiesSet");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("SimpleUserService.destroy");
     }
 }
