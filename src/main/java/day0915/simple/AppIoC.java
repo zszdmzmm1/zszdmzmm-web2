@@ -12,11 +12,13 @@ public class AppIoC {
         userService.loginService();
         userService.showLoginService();
 
+
         //-----------------------------
         System.out.println("-------------");
 
 
         UserDao userDao = ac.getBean(UserDao.class);
         userDao.login();
+        ac.close();
     }
 }
