@@ -5,5 +5,5 @@
 <bean id="userService" class="day0915.simple.service.impl.SimpleUserService">
     <property name="UserDao" ref="userDao"/>
 </bean>
-<bean id="userDao" class="day0915.simple.dao.impl.UserDaoImpl"/>
+<bean id="userDao" class="day0915.simple.dao.impl.NopUserDao"/>
 </beans>
