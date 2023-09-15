@@ -12,6 +12,10 @@ public class SimpleUserService implements UserService, InitializingBean, Disposa
         System.out.println("SimpleUserService.SimpleUserService");
     }
 
+    public SimpleUserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }
