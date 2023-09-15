@@ -2,9 +2,29 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="userService" class="day0915.simple.service.impl.SimpleUserService">
-<!--    <property name="userDao" ref="userDao"/>-->
-    <constructor-arg name="userDao" ref="userDao"/>
-</bean>
-<bean id="userDao" class="day0915.simple.dao.impl.NopUserDao"/>
+    <bean id="userService" class="day0915.simple.service.impl.SimpleUserService">
+        <!--    <property name="userDao" ref="userDao"/>-->
+        <constructor-arg name="userDao" ref="userDao"/>
+
+    </bean>
+    <bean id="userDao" class="day0915.simple.dao.impl.InjectDemoUserDao">
+        <property name="array" value="1, 2, 3"/>
+        <property name="set" value="'4', '5'"/>
+        <property name="list" value="'你', '我', '她'"/>
+        <property name="map">
+            <map>
+                <entry key="key1" value="value1"/>
+                <entry key="key2" value="value2"/>
+                <entry key="key3" value="value3"/>
+            </map>
+        </property>
+        <property name="properties">
+            <map>
+                <entry key="key4" value="value4"/>
+                <entry key="key5" value="value5"/>
+                <entry key="key6" value="value6"/>
+            </map>
+        </property>
+        <property name="straightValue" value="34"/>
+    </bean>
 </beans>
