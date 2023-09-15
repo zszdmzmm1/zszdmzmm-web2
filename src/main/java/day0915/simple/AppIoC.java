@@ -1,8 +1,9 @@
 package day0915.simple;
 
-import day0915.demo.dao.UserDao;
-import day0915.demo.service.UserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import day0915.simple.service.UserService;
+import day0915.simple.dao.UserDao;
+
 
 public class AppIoC {
     public static void main(String[] args) {

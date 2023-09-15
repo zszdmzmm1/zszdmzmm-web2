@@ -2,6 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="userService" class="day0915.demo.service.impl.NopUserService" />
-<bean id="userDao" class="day0915.demo.dao.impl.UserDaoImpl" />
+<bean id="userService" class="day0915.simple.service.impl.SimpleUserService">
+    <property name="UserDao" ref="userDao"/>
+</bean>
+<bean id="userDao" class="day0915.simple.dao.impl.UserDaoImpl"/>
 </beans>
