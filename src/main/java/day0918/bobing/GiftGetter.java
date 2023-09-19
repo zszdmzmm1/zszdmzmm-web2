@@ -8,6 +8,17 @@ import java.util.Map;
 
 public class GiftGetter {
 
+    private static final class GiftGetterHolder {
+        private static final GiftGetter GIFT_GETTER = new GiftGetter();
+    }
+
+    private GiftGetter() {
+    }
+
+    public static GiftGetter getInstance() {
+        return GiftGetterHolder.GIFT_GETTER;
+    }
+
     Gift gift1 = new Gift(1, "5元", "一秀");
     Gift gift2 = new Gift(2, "10元", "二举");
     Gift gift3 = new Gift(3, "20元", "四进");
@@ -50,9 +61,9 @@ public class GiftGetter {
             return gift4;
         } else if (numMap.get(2) == 4) {
             return gift3;
-        } else if (numMap.get(4) == 2){
+        } else if (numMap.get(4) == 2) {
             return gift2;
-        } else if (numMap.get(4) == 1){
+        } else if (numMap.get(4) == 1) {
             return gift1;
         }
         return null;

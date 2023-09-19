@@ -38,7 +38,7 @@
         </c:if>
     </div>
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center my-5">
         <img src="diceImg?point=1" alt="" class="dice">
         <img src="diceImg?point=1" alt="" class="dice">
         <img src="diceImg?point=1" alt="" class="dice">
@@ -46,6 +46,9 @@
         <img src="diceImg?point=1" alt="" class="dice">
         <img src="diceImg?point=1" alt="" class="dice">
     </div>
+
+    <div class="my-5" id="result"></div>
+
     <script src="build/assets/app.js"></script>
 
     <script>
@@ -93,7 +96,11 @@
                                 let point = resultArray[index].trim();
                                 $(element).attr("src", "diceImg?point=" + point);
                             })
-                            alert("投掷结果:" + result + "\n" + gift);
+                            $("#result").append(
+                                `<div class="d-flex justify-content-center animate__animated animate__fadeIn animate__delay-1s">
+                                    <span>投掷结果：${'${result}'}</span>
+                                    <span>${'${gift}'}</span>
+                                </div>`)
                         })
                 })
         })

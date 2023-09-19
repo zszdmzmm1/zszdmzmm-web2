@@ -22,22 +22,13 @@ public class BoBingServiceImpl implements BoBingService{
 
 
     @Override
-    public int getNumberOfDraws(int money) {
-        int count = money / 50;
-        if(count > 5){
-            count = 5;
-        }
-        return count;
-    }
-
-    @Override
     public MessageDTO getResult() {
         MessageDTO messageDTO = new MessageDTO();
         List<Integer> numList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             numList.add(Util.num(6) + 1);
         }
-        GiftGetter giftGetter = new GiftGetter();
+        GiftGetter giftGetter = GiftGetter.getInstance();
         messageDTO.setObject(giftGetter.getGift(numList));
         messageDTO.setMessage(numList.toString());
         return messageDTO;
