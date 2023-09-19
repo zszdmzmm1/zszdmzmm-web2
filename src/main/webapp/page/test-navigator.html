@@ -8,6 +8,10 @@
     <title>测试导航页</title>
 </head>
 <body>
+    <h1>day0918</h1>
+    <ul>
+        <li><a href="../boBing">博饼</a></li>
+    </ul>
     <h1>day0915</h1>
     <ul>
         commit:
@@ -15,9 +19,14 @@
         <li><img src="../image/img.png" alt=""></li>
         <li>spring xml 配置bean ClassPathXmlApplicationContext：通过改变配置文件达到不修改代码实现实现类转换</li>
         <li>简化抽象结构: @see day0915.simple</li>
-        <li><a href="https://docs.spring.io/spring-framework/reference/core/beans/introduction.html#:~:text=Inversion%20of%20Control%20(IoC)">Inversion of Control(IoC)</a></li>
+        <li>
+            <a href="https://docs.spring.io/spring-framework/reference/core/beans/introduction.html#:~:text=Inversion%20of%20Control%20(IoC)">Inversion
+                of Control(IoC)</a></li>
         <li><img src="../image/img_1.png" alt=""></li>
-        <li>DI - Setter-based <a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html#:~:text=Dependency%20Injection-,Dependency%20injection,-(DI)%20is%20a">dependency injection</a>: 用property时注入dependency依赖，在new对象时构造所依赖的对象</li>
+        <li>DI - Setter-based <a
+                href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html#:~:text=Dependency%20Injection-,Dependency%20injection,-(DI)%20is%20a">dependency
+            injection</a>: 用property时注入dependency依赖，在new对象时构造所依赖的对象
+        </li>
         <li><a href="../Constructor">测试Servlet的init，构造器方法哪个先被调用</a></li>
         <li>配置文件添加init，destroy方法指定</li>
         <li>InitializingBean, DisposableBean: 通过实现这两个接口，在生命周期始末调用这两个方法</li>
@@ -55,7 +64,9 @@
         <li>&lt;sql id="select-column"&gt;
             ，resultMap：通过两种方式配置文件使java的pojo类属性与数据库columns的不同名但相对应的属性匹配
         </li>
-        <li>BlogListMapperTest@selectByCondition 传参数： 向mybatis实现类传参数，通过接口方法形参处注释@param，或在xml文件中用默认参数指定法，如#{arg0},#{arg1},#{arg2}。</li>
+        <li>BlogListMapperTest@selectByCondition 传参数：
+            向mybatis实现类传参数，通过接口方法形参处注释@param，或在xml文件中用默认参数指定法，如#{arg0},#{arg1},#{arg2}。
+        </li>
         <li>BlogListMapperTest@selectByCondition 传pojo类: 向mybatis实现类传具体java类，通过#{stateName}识别。</li>
         <li>BlogListMapperTest@selectByCondition 传map： 顾名思义，同样可以通过#{key}识别。</li>
     </ul>
