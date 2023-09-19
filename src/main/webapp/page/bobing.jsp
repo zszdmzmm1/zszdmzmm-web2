@@ -19,8 +19,94 @@
     <title>博饼</title>
 </head>
 <body>
-    <button type = button class="btn btn-primary">提交金额</button>
-    <button type = button class="btn btn-primary">开始博饼(剩余0次)</button>
+    <div class="d-flex justify-content-center my-5" id="button-group">
+        <c:if test="${sessionScope.from == 'init'}">
+            <button type=button class="btn btn-primary me-3" id="init">提交金额</button>
+            <button type=button class="btn btn-primary me-3" id="draw" disabled>开始博饼</button>
+        </c:if>
+        <c:if test="${sessionScope.from != 'init'}">
+            <button type=button class="btn btn-primary me-3" id="init" <c:if test="${sessionScope.count > 0}">disabled</c:if>>
+                提交金额
+                <c:if test="${sessionScope.count > 0}">:
+                    <span id="money">${sessionScope.money}</span>
+                </c:if>
+            </button>
+            <button type=button class="btn btn-primary me-3" id="draw" <c:if test="${sessionScope.count == 0}">disabled</c:if>>
+                开始博饼: (剩余<span id="count"><span id="temp">${sessionScope.count}</span></span>次)
+            </button>
+            <button type="button" class="btn btn-primary me-3" id="reset">重置</button>
+        </c:if>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <img src="diceImg?point=1" alt="" class="dice">
+        <img src="diceImg?point=1" alt="" class="dice">
+        <img src="diceImg?point=1" alt="" class="dice">
+        <img src="diceImg?point=1" alt="" class="dice">
+        <img src="diceImg?point=1" alt="" class="dice">
+        <img src="diceImg?point=1" alt="" class="dice">
+    </div>
     <script src="build/assets/app.js"></script>
+
+    <script>
+        $("#init").click(function () {
+            let money = (Math.random() * 300).toFixed(2);
+            let count = Math.floor(money / 50);
+            if (count > 5) {
+                count = 5;
+            }
+            $.ajax({
+                method: "POST",
+                url: "setDiceCount",
+                data: {from: "start", money: money, count: count}
+            })
+                .done(function () {
+                    window.location.reload();
+                })
+        })
+
+
+        $("#draw").click(function () {
+            let money = $("#money").text();
+            let count = $("#count").text();
+            $.ajax({
+                method: "GET",
+                url: "draw",
+                dataType: "json"
+            })
+                .done(function (data) {
+                    let gift = data.gift;
+                    let result = data.result;
+                    result = result.substring(1, result.length -  1);
+                    let resultArray = result.split(",");
+                    $.ajax({
+                        method: "GET",
+                        url: "setDiceCount",
+                        data: {from: "dice", money: money, count: count}
+                    })
+                        .done(function () {
+                            $("#count").load("boBing #temp");
+                            if($("#temp").text() == 1){
+                                $("#draw").attr("disabled", true);
+                            }
+                            $(".dice").each(function (index, element){
+                                let point = resultArray[index].trim();
+                                $(element).attr("src", "diceImg?point=" + point);
+                            })
+                            alert("投掷结果:" + result + "\n" + gift);
+                        })
+                })
+        })
+
+
+        $("#reset").click(function () {
+            $.ajax({
+                method: "GET",
+                url: "reset"
+            }).done(function () {
+                window.location.reload();
+            })
+        })
+    </script>
 </body>
 </html>
