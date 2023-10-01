@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -204,9 +203,8 @@ public class BlogListMapperTest {
 //        _____________________________________________
 
 
-
         mapper.deleteByIds(ids);
-        for(int i = 0; i < ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             BlogList blogList1 = mapper.selectById(i);
             Assertions.assertNull(blogList1);
         }
